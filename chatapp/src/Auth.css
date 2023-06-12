@@ -1,0 +1,471 @@
+@media (min-width: 820px) {
+    .register-cont {
+      display: flex;
+      place-content: center;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--White);
+      width: 56rem;
+      position: relative;
+      top: 2rem;
+      height: 47.5rem !important;
+      gap: 2rem;
+      margin: auto;
+      box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0),
+        0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+      border-radius: 1rem;
+      margin-bottom: 4rem;
+    }
+    .signup-img{
+  
+        height: 47.5rem !important;
+    }
+    .signup-img-text {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url(./Image/unsplash_9pjBx5uVBlg.png);
+      background-repeat: no-repeat;
+      height: 47.5rem !important;
+      background-size: cover;
+      flex: 1;
+      color: var(--White);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 1rem 0 0 1rem;
+      margin: auto;
+      gap: 1.2rem;
+      padding: 18rem 1rem;
+    }
+    .signup-img-text p {
+      flex: 1;
+      width: 23rem;
+      line-height: 1.5rem;
+    }
+    .sign-in-cont {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      flex: 3;
+      padding: 1rem 4rem 1rem 3rem;
+      width: 100%;
+    }
+    .sign-in-cont h1 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      margin-top: 0.5rem;
+      width: 25rem;
+      text-align: center;
+    }
+    .sign-in-cont label {
+      font-size: 0.8rem;
+    }
+    .names-cont {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 0.6rem;
+    }
+    .names-cont input,
+    .names-cont-1 input,
+    #profession {
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.6rem 0;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      border: 0.3px solid var(--s-border-color);
+    }
+    .names-cont input:hover,
+    .names-cont-1 input:hover,
+    #profession:hover {
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.6rem 0;
+      border-radius: 0.4rem;
+      transition: 1s ease-in-out all;
+      border: 0.3px solid var(--btn-color);
+    }
+    .sign-in-cont .btn {
+      border-radius: 0.4rem;
+      cursor: pointer;
+      padding: 0.7rem 1rem;
+      color: var(--White);
+      background-color: var(--btn-color);
+      border: none;
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: 400;
+      transition: 1s ease all;
+      font-family: var(--font-family-headings);
+    }
+    .sign-in-cont .btn:hover {
+      color: var(--Black);
+      background-color: var(--White);
+      border: 1px solid var(--btn-color);
+    }
+    .names-cont-1 {
+      display: grid;
+      grid-template-columns: auto;
+    }
+    .socials button {
+      border-radius: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: 1s ease all;
+      padding: 0.8rem 1rem;
+      width: 100% !important;
+      margin: 0.6rem 0;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      place-content: center;
+      background-color: var(--White);
+      border: 0.3px solid var(--s-border-color);
+      font-family: var(--font-family-headings);
+    }
+    .socials button:hover {
+      background-color: var(--text-bg-1);
+      padding: 0.9rem 1rem;
+      border: 0.3px solid var(--btn-color);
+    }
+    .nav-icon{
+      width: 1.5rem;
+      height: 1.5rem;
+      color: var(--White) !important;
+    }
+    .nav-icon:hover{
+      color: var(--Bg-total);
+      transition: 1s ease all;
+    }
+    .fb{
+      width: 1.5rem;
+      height: 1.5rem;
+      color: var(--Fb-bg);
+    }
+    .auth-router {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: -1rem;
+    }
+    .nav-r-1 {
+      text-align: right;
+    }
+    .auth-router .nav-route {
+      border-bottom: 4px solid var(--s-border-color);
+      inline-size: 100%;
+      text-decoration: none;
+      color: var(--Black);
+      padding: 1rem 0;
+    }
+    .auth-router .nav-route.active {
+      border-bottom: 4px solid var(--btn-color);
+    }
+    /* log-in */
+    .sign-up-cont-2 {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      flex: 2;
+      padding: 1rem 3rem;
+      width: 100%;
+  }
+    .sign-up-cont-2 h1 {
+      text-align: center;
+      margin: 3rem 0;
+  }
+  .names-cont-2 input{
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      margin: 0.6rem 0;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      border: 0.3px solid var(--s-border-color);
+    }
+  .names-cont-2 input:hover{
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      margin: 0.6rem 0;
+      border-radius: 0.4rem;
+      transition: 1s ease-in-out all;
+      border: 0.3px solid var(--btn-color);
+    }
+    .sign-up-cont-2 .btn {
+      border-radius: 0.4rem;
+      cursor: pointer;
+      padding: 0.7rem 1rem;
+      margin-top: 1.5rem;
+      color: var(--White);
+      background-color: var(--btn-color);
+      border: none;
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: 400;
+      transition: 1s ease all;
+      font-family: var(--font-family-headings);
+    }
+    .sign-up-cont-2 .btn:hover {
+      color: var(--Black);
+      background-color: var(--White);
+      border: 1px solid var(--btn-color);
+    }
+    .sign-up-cont-2 .auth-router {
+          margin-top: -7rem;
+    }
+    .pwd-cont{
+      position: relative;
+  }
+    .eyes{
+      position: absolute;
+      top: 1.4rem;
+      right: 0.5rem;
+      margin-right: 0.5rem;
+    }
+    .eye-icon{
+      cursor: pointer !important;
+      font-size: 1rem;
+    }
+    .isError{
+      width: 100%;
+      font-size: 0.8rem;
+      color: red;
+      margin-top: 0.1rem;
+    }
+  }
+  
+  @media (max-width: 947px) {
+    .register-cont {
+      width: 35rem;
+      padding: 1rem;
+      min-height: 37rem;
+    }
+    .signup-img-text {
+      display: none;
+      flex: 0;
+    }
+    .sign-in-cont {
+      display: flex;
+      flex-direction: column;
+      flex: 0 0;
+      padding: 1rem;
+      width: 100% !important;
+      margin: auto;
+    }
+  }
+  
+  @media (max-width: 819px) {
+    .register-cont {
+      display: flex;
+      place-content: center;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--White);
+      width: 37rem;
+      position: relative;
+      top: 2rem;
+      min-height: 40rem !important;
+      margin: auto;
+      box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0),
+        0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+      border-radius: 1rem;
+    }
+    .sign-in-cont {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      flex: 0;
+      padding: 1rem 1rem !important;
+      width: 110% !important;
+      margin: auto;
+    }
+    .sign-in-cont h1 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      margin-top: 0.5rem;
+      width: 19rem;
+      text-align: center;
+    }
+    .sign-in-cont label {
+      font-size: 0.8rem;
+    }
+    .names-cont {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      grid-gap: 0.6rem;
+    }
+    .names-cont input,
+    .names-cont-1 input,
+    #profession {
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.6rem 0;
+      border-radius: 0.4rem;
+      border: 0.3px solid var(--Black);
+    }
+    .sign-in-cont .btn {
+      border-radius: 0.4rem;
+      cursor: pointer;
+      padding: 0.7rem 1rem;
+      color: var(--White);
+      background-color: var(--btn-color);
+      border: none;
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: 400;
+      transition: 1s ease all;
+      font-family: var(--font-family-headings);
+    }
+    .names-cont-1 {
+      display: grid;
+      grid-template-columns: auto;
+    }
+    .socials button {
+      border-radius: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: 1s ease all;
+      padding: 0.8rem 1rem;
+      width: 100% !important;
+      margin: 0.6rem 0;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center !important;
+      place-content: center;
+      background-color: var(--White);
+      border: 0.3px solid var(--s-border-color);
+      font-family: var(--font-family-headings);
+    }
+    .socials button:hover {
+      background-color: var(--text-bg-1);
+      padding: 0.9rem 1rem;
+      border: 0.3px solid var(--btn-color);
+    }
+    .nav-icon{
+      width: 1.5rem;
+      height: 1.5rem;
+      color: var(--White) !important;
+    }
+    .nav-icon:hover{
+      color: var(--Bg-total);
+      transition: 1s ease all;
+    }
+    .fb{
+      width: 1.5rem;
+      height: 1.5rem;
+      color: var(--Fb-bg);
+    }
+    .nav-r-1 {
+      text-align: right;
+    }
+    .auth-router {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .auth-router .nav-route {
+      border-bottom: 4px solid var(--s-border-color);
+      text-decoration: none;
+      color: var(--Black);
+      inline-size: 100%;
+      padding: 1rem 0;
+    }
+    .auth-router .nav-route.active {
+      border-bottom: 4px solid var(--btn-color);
+    }
+    .fbb {
+      margin-bottom: 4rem !important;
+    }
+    
+    /* log-in */
+    .sign-up-cont-2 {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      flex: 2;
+      padding: 1rem 3rem;
+      width: 100%;
+  }
+    .sign-up-cont-2 h1 {
+      text-align: center;
+      margin: 3rem 0;
+  }
+  .names-cont-2 input{
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.6rem 0;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      border: 0.3px solid var(--s-border-color);
+    }
+  .names-cont-2 input:hover{
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.6rem 0;
+      border-radius: 0.4rem;
+      transition: 1s ease-in-out all;
+      border: 0.3px solid var(--btn-color);
+    }
+    .sign-up-cont-2 .btn {
+      border-radius: 0.4rem;
+      cursor: pointer;
+      padding: 0.7rem 1rem;
+      margin-top: 1.5rem;
+      color: var(--White);
+      background-color: var(--btn-color);
+      border: none;
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: 400;
+      transition: 1s ease all;
+      font-family: var(--font-family-headings);
+    }
+    .sign-up-cont-2 .btn:hover {
+      color: var(--Black);
+      background-color: var(--White);
+      border: 1px solid var(--btn-color);
+    }
+    .sign-up-cont-2 .auth-router {
+          margin-top: -7rem;
+    }
+    .pwd-cont{
+      position: relative;
+  }
+    .eyes{
+      position: absolute;
+      top: 1.4rem;
+      right: 0.5rem;
+      margin-right: 0.5rem;
+    }
+    .eye-icon{
+      cursor: pointer !important;
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 586px) {
+    .register-cont {
+      width: 100%;
+      margin: auto !important;
+      box-shadow: none;
+      top: 0;
+    }
+    .sign-in-cont {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      flex: 0;
+      padding: 1rem !important;
+      width: 70%;
+      margin: auto;
+    }
+    .fbb {
+      margin-bottom: 0 !important;
+    }
+    /* log-in */
+    .sign-up-cont-2 {
+      padding: 1rem;
+  }
+  }
+  
