@@ -14,10 +14,12 @@ const Feed = () => {
 
   return (
     <div className='feed-container'>
-        <BlogNav/>
+      <BlogNav />
+      <div className="feed-sect">
         <SearchBar data={[]} />
-        <div>
-  </div>
+      </div>
+      <div>
+      </div>
     </div>
   )
 }

@@ -1,35 +1,35 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from "react";
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: () => void;
-  logout: () => void;
+  signin: () => void;
+  signout: () => void;
 }
 
-interface Props{
+interface Props {
   children: React.ReactNode;
 }
 
 export const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
-  login: () => {},
-  logout: () => {},
+  signin: () => {},
+  signout: () => {},
 });
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = () => {
+  const signin = () => {
     setIsAuthenticated(true);
   };
 
-  const logout = () => {
+  const signout = () => {
     setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, signin, signout }}>
       {children}
     </AuthContext.Provider>
   );
-}
+};

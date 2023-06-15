@@ -1,75 +1,96 @@
 import { useState } from "react";
-import { auth, provider, googleProvider } from "../../firebase";
+import { auth, provider, googleProvider, db } from "../../firebase";
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
+import { setDoc, doc } from "firebase/firestore";
 import { AiFillFacebook } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-import React from "react";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { AuthForm, authFormSchema } from "../../Models/Form";
+import { useDispatch } from "react-redux";
+import { signin } from "../../Features/AuthSlice";
 
 const SignUp = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [visible, setVisible] = useState("");
-  const [isVisible, setIsVisible] = useState<string>("");
+  const [visible, setVisible] = useState<true | false>(false);
+  const [isVisible, setIsVisible] = useState<true | false>(false);
+  const [loading, setLoading] = useState(false);
+  const [isError, setIsError] = useState<null | string>(null);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const inputType = visible ? "text" : "password";
   const inputTypes = isVisible ? "text" : "password";
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-        navigate("/signin");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const handleFormSubmit = async (data: AuthForm) => {
+    const { email, password } = data;
+    try {
+      setLoading(true);
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(user);
+      navigate("/signin");
+      await setDoc(doc(db, "users", user.uid), { email });
+      setLoading(false);
 
-    // try {
-    //   const { user } = await auth.createUserWithEmailAndPassword(email, password);
-    //   await firestore.collection('users').doc(user.uid).set({
-    //     firstName,
-    //     lastName,
-    //     displayName: `${firstName} ${lastName}`,
-    //   });
-    // } catch (error) {
-    //   console.error(error);
-    // }
-
+      if (user && user.email)
+        dispatch(
+          signin({
+            email: user.email,
+            id: user.uid,
+            photoUrl: user.photoURL || null,
+          })
+        );
+    } catch (error: any) {
+      setLoading(false);
+      const errorCode = error.code;
+      setIsError(errorCode);
+    }
   };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AuthForm>({
+    resolver: yupResolver(authFormSchema),
+  });
 
   // sign in with google
   const GoogleLogin = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider)
-      console.log(result.user);
-      navigate('/blogs')
+      const { user } = await signInWithPopup(auth, googleProvider);
+      if (user && user.email)
+        dispatch(
+          signin({
+            email: user.email,
+            id: user.uid,
+            photoUrl: user.photoURL || null,
+          })
+        );
+      navigate("/feed");
     } catch (error) {
-      console.log(error)
+      console.log("Error signing in:", error);
     }
-  }
-    // sign in with facebook
-    const FacebookLogin = async () => {
-      try {
-        const result = await signInWithPopup(auth, provider)
-        console.log(result.user)
-        navigate('/feed')
-        console.log(result.user.providerData)
-      } catch (error) {
-        console.log(error)
-      }
+  };
+  // sign in with facebook
+  const FacebookLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      console.log(result.user);
+      navigate("/feed");
+      console.log(result.user.providerData);
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-  const isMatch = password === confirmPassword;
   return (
     <section>
       <div className="register-cont">
@@ -91,17 +112,42 @@ const SignUp = () => {
               LOGIN
             </NavLink>
           </div>
-          <form onSubmit={handleSubmit}>
+          <div className="err-dis">{isError && <p>{isError}</p>}</div>
+          <form onSubmit={handleSubmit(handleFormSubmit)}>
             <h1>Register as a Writer/Reader</h1>
-            
+
             <div className="names-cont">
               <div>
                 <label htmlFor="First">First name</label>
-                <input type="text" placeholder="First name" className="names" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+                <input
+                  type="text"
+                  placeholder="First name"
+                  className="names"
+                  {...register("firstName")}
+                />
+                {errors.firstName ? (
+                  <span style={{ color: "red", fontSize: 12, marginBottom: 4 }}>
+                    {errors.firstName.message}
+                  </span>
+                ) : (
+                  <></>
+                )}
               </div>
               <div>
                 <label htmlFor="LastName">Last name</label>
-                <input type="text" placeholder="Last name" className="names" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Last name"
+                  className="names"
+                  {...register("lastName")}
+                />
+                {errors.lastName ? (
+                  <span style={{ color: "red", fontSize: 12, marginBottom: 4 }}>
+                    {errors.lastName.message}
+                  </span>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className="names-cont-1">
@@ -113,21 +159,28 @@ const SignUp = () => {
               </select>
 
               <label htmlFor="email">Email address</label>
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+              <input type="email" placeholder="Email" {...register("email")} />
+              {errors.email ? (
+                <span style={{ color: "red", fontSize: 12, marginBottom: 4 }}>
+                  {errors.email.message}
+                </span>
+              ) : (
+                <></>
+              )}
               <label htmlFor="pwd">Password</label>
               <div className="pwd-cont">
                 <input
                   placeholder="Create Password"
-                  value={password}
                   type={inputType}
-                  name="password"
-                  onChange={(e) => setPassword(e.target.value)}
+                  {...register("password")}
                 />
+                {errors.password ? (
+                  <span style={{ color: "red", fontSize: 12, marginBottom: 4 }}>
+                    {errors.password.message}
+                  </span>
+                ) : (
+                  <></>
+                )}
                 <div className="eyes" onClick={() => setVisible(!visible)}>
                   {visible ? (
                     <AiOutlineEye className="eye-icon" />
@@ -141,11 +194,16 @@ const SignUp = () => {
                 <input
                   type={inputTypes}
                   placeholder="Confirm Password"
-                  value={confirmPassword}
-                  name="confirm_password"
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  {...register("confirmPassword")}
                 />
-                <p style={{color: isMatch ? 'green': 'red' , fontSize: 14}}>{isMatch ? 'Password Matched' : 'Password not match'}</p>
+                {errors.confirmPassword ? (
+                  <span style={{ color: "red", fontSize: 12, marginBottom: 4 }}>
+                    {errors.confirmPassword.message}
+                  </span>
+                ) : (
+                  <></>
+                )}
+
                 <div className="eyes" onClick={() => setIsVisible(!isVisible)}>
                   {isVisible ? (
                     <AiOutlineEye className="eye-icon" />
@@ -156,7 +214,7 @@ const SignUp = () => {
               </div>
             </div>
             <br />
-            <button type="submit" className="btn">
+            <button disabled={loading} type="submit" className="btn">
               Create account
             </button>
           </form>
@@ -165,7 +223,11 @@ const SignUp = () => {
               <FcGoogle className="nav-icon" />
               Sign up with google
             </button>
-            <button className="fbb" onClick={FacebookLogin} onChange={() => navigate('/blogs')}>
+            <button
+              className="fbb"
+              onClick={FacebookLogin}
+              onChange={() => navigate("/blogs")}
+            >
               <AiFillFacebook className="fb" />
               Sign up with Facebook
             </button>

@@ -24,8 +24,8 @@
       padding: 2rem 3.5rem;
       width: 18rem;
       height: 100%;
-      overflow-y: scroll;
-      border-right: 1px solid #667788;
+      overscroll-behavior-x: contain;
+      border-right: 1px solid var(--border-color);
     }
     .blog-nav-cont h1 {
       margin-top: 1rem;
@@ -215,23 +215,121 @@
         width: 100%;
         height: 2.5rem;
         padding: 1.8rem 3rem;
-        border-bottom: 1px solid #667788;
+        border-bottom: 1px solid var(--border-color);
         background-color: var(--White);
         position: relative;
       }
       .search-bd{
-        width: 40%;
+        border: 1px solid var(--border-color);
+        width: 28.7rem;
+        border-radius: .5rem;
         padding: 0.9rem 4rem;
       }
       .search-icon {
+        width: 1.2rem;
+        height: 1.2rem;
+        position: absolute;
+        left: 1.5rem;
+        cursor: pointer;
+      }
+      .search-cont{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        gap: 7rem;
+      }
+      .alarm-cont{
+        display: flex;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        place-items: right;
+        gap: .9rem;
+        position: sticky;
+        margin-right: -13rem;
+        /* position: absolute;
+        right: -13rem; */
+      }
+      .alarm-cont img{
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 1px solid var(--btn-color);
+      }
+      .alarm-cont img:hover{
+        transition: .8s ease-in-out all;
+        transform: scale(1.1);
+      }
+      .alarm-icon{
+        cursor: pointer;
         width: 1.3rem;
         height: 1.3rem;
-        position: absolute;
-        left: 23rem;
+      }
+      .alarm-icon:hover{
+        transition: .8s ease all;
+        transform: scale(1.1);
       }
       /* feed-blog */
       .feed-container{
         display: flex;
       }
+      .feed-sect{
+        display: flex;
+        width: 100%;
+      }
   }
+
+@media (max-width: 1130px) {
+  .search-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    height: 2.5rem;
+    padding: 1.8rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--White);
+    position: relative;
+  }
+  .search-bd{
+    border: 1px solid var(--border-color);
+    width: 25rem;
+    border-radius: .5rem;
+    padding: 0.9rem 4rem;
+    position: sticky;
+    margin-left: -4rem;
+  }
+  .search-cont{
+    place-content: center;
+    gap: 2rem;
+    margin: 0 auto;
+  }
+  .search-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    position: absolute;
+    left: -2.5rem;
+    cursor: pointer;
+  }
+  .alarm-cont{
+    display: flex;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    place-items: right;
+    gap: .9rem;
+    position: sticky;
+    margin-right: -13rem;
+    /* position: absolute;
+    right: -13rem; */
+  }
+}  
+@media (max-width: 1150px) {
+  .search-cont{
+    place-content: center;
+    gap: 2rem;
+    margin: 0 auto;
+  }
+}  
   

@@ -7,30 +7,30 @@ const BlogNav = () => {
       <h1>Z-chat</h1>
       <h3>Overview</h3>
       <div className="overview-cont">
-          <NavLink to="/feed" className="overview-link feed-cont">
+        <NavLink to="/feed" className="overview-link feed-cont">
           <div className="feed-icon"></div>
-            Feed
-          </NavLink>
-          <NavLink to="/bookmark" className="overview-link bookmark-cont">
+          Feed
+        </NavLink>
+        <NavLink to="/bookmark" className="overview-link bookmark-cont">
           <div className="bookmark-icon"></div>
-            Bookmarks
-          </NavLink>
-          <NavLink to="/team-blog" className="overview-link team-blog-cont">
+          Bookmarks
+        </NavLink>
+        <NavLink to="/team-blog" className="overview-link team-blog-cont">
           <div className="team-blogs-icon"></div>
-            Team blogs
-          </NavLink>
-          <NavLink to="/draft" className="overview-link draft-cont">
+          Team blogs
+        </NavLink>
+        <NavLink to="/draft" className="overview-link draft-cont">
           <div className="drafts-icon"></div>
-            Drafts
-          </NavLink>
-          <NavLink to="/analytics" className="overview-link analytics-cont">
+          Drafts
+        </NavLink>
+        <NavLink to="/analytics" className="overview-link analytics-cont">
           <div className="analytics-icon"></div>
-            Analytics
-          </NavLink>
+          Analytics
+        </NavLink>
       </div>
       <div className="trending-cont">
         <div className="trend-tag-cont">
-        <h2>Trending Tags</h2>
+          <h2>Trending Tags</h2>
           <div className="trend-tag-icon"></div>
         </div>
         <div className="trending-links">
@@ -57,14 +57,14 @@ const BlogNav = () => {
       <div className="personal-cont">
         <h2>Personal</h2>
         <div className="personal-links">
-            <NavLink to="/account" className="personal-link acc-cont">
+          <NavLink to="/account" className="personal-link acc-cont">
             <div className="account-icon"></div>
-              Account
-            </NavLink>
-            <NavLink to="/notifications" className="personal-link notify-cont">
+            Account
+          </NavLink>
+          <NavLink to="/notifications" className="personal-link notify-cont">
             <div className="notifications-icon"></div>
-              Notifications
-            </NavLink>
+            Notifications
+          </NavLink>
         </div>
       </div>
     </div>

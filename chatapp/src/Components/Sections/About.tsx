@@ -4,8 +4,8 @@ import Nav from '../Nav'
 const About = () => {
   return (
     <>
-    <Nav/>
-    <section id="about">
+      <Nav />
+      <section id="about">
         <div className="sect-1">
           <div className="sect-1-container">
             <div className="sect-1-text">
@@ -42,9 +42,9 @@ const About = () => {
             <div className="aside">
               <div className="aside-cards">
                 <div className="card-1">
-                <div className="img">
-                  <img src="../../Image/carbon_analytics.jpg" alt="" />
-                </div>
+                  <div className="img">
+                    <img src="../../Image/carbon_analytics.jpg" alt="" />
+                  </div>
                   <h1>Analytics</h1>
                   <p>
                     Analytics to track the number of views, likes and comment
@@ -63,9 +63,9 @@ const About = () => {
                   </p>
                 </div>
                 <div className="card-3">
-                <div className="img">
-                  <img src="" alt="" />
-                </div>
+                  <div className="img">
+                    <img src="" alt="" />
+                  </div>
                   <h1>Content creation</h1>
                   <p>
                     Write nice and appealing with our in-built markdown, a rich

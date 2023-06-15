@@ -1,10 +1,8 @@
-import React from "react";
 import Nav from "./Nav";
 import BlogNav from "./BlogNav";
 
 
 const Blogs = () => {
-  // console.log(user)
   return (
     <div className="blog">
       <Nav />

@@ -10,14 +10,14 @@ const Home = () => {
     <div id="home">
       <Nav />
       {/* main */}
-      <Main/>
+      <Main />
       {/* section-1 */}
-      <About/>
+      <About />
       {/* section-2 */}
-      <Join/>
+      <Join />
       {/* section-3 */}
-      <Share/>
-      <Footer/>
+      <Share />
+      <Footer />
     </div>
   );
 };
