@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth, provider, googleProvider, db } from "../../firebase";
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { AuthForm, authFormSchema } from "../../Models/Form";
 import { useDispatch } from "react-redux";
 import { signin } from "../../Features/AuthSlice";
+import { useAppSelector } from "../../Hooks/StoreHook";
 
 const SignUp = () => {
   const [visible, setVisible] = useState<true | false>(false);
@@ -20,11 +21,20 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState<null | string>(null);
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const inputType = visible ? "text" : "password";
   const inputTypes = isVisible ? "text" : "password";
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useAppSelector(state => state.auth)
+  
+  useEffect(() => {
+    if (Boolean(user)){
+      // navigate("/");
+
+    }
+  }, [user, navigate])
+  
   const handleFormSubmit = async (data: AuthForm) => {
     const { email, password } = data;
     try {
@@ -33,9 +43,9 @@ const SignUp = () => {
         auth,
         email,
         password
-      );
+        );
+        navigate("/signin");
       console.log(user);
-      navigate("/signin");
       await setDoc(doc(db, "users", user.uid), { email });
       setLoading(false);
 

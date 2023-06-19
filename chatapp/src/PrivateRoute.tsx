@@ -1,10 +1,8 @@
-import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { AuthContext } from "./Components/Context/AuthContext";
-import React from "react";
+import { useAppSelector } from "./Hooks/StoreHook";
 
 export const PrivateRoute = () => {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { user } = useAppSelector((state) => state.auth);
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/signin" />;
+  return Boolean(user) ? <Outlet /> : <Navigate to="/signin" />;
 };

@@ -1,31 +1,60 @@
-import React from "react";
+import { signOut } from "firebase/auth";
 import { NavLink } from "react-router-dom";
+import { auth } from "../firebase";
+import { BsBookmarks, BsSearch } from 'react-icons/bs';
+import { VscAccount } from 'react-icons/vsc';
+import { AiOutlineMenu, AiOutlineTeam } from 'react-icons/ai';
+import { MdOutlineAnalytics, MdOutlineDrafts, MdOutlineFeedback, MdOutlineNotificationsNone } from "react-icons/md";
+import { useAppDispatch, useAppSelector } from "../Hooks/StoreHook";
+import { signout } from "../Features/AuthSlice";
+// import { useEffect } from "react";
+
 
 const BlogNav = () => {
+
+   
+
+  // const { user } = useAppSelector(state => state.auth)
+  const dispatch = useAppDispatch()
+  // const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    dispatch(signout());
+  }
+
+  // useEffect(() => {
+  //   if(Boolean(!user)){
+  //     navigate('/signin');
+  //   }
+  // }, [navigate, user])
+
   return (
+    <>
     <div className="blog-nav-cont">
-      <h1>Z-chat</h1>
+      
+      {/* <div className={`sidebar-cont ${navCollapse ? 'navcollapse' : '' }`}> */}
       <h3>Overview</h3>
       <div className="overview-cont">
         <NavLink to="/feed" className="overview-link feed-cont">
-          <div className="feed-icon"></div>
-          Feed
+          <MdOutlineFeedback className="feed-icon" />
+          <p>Feed</p>
         </NavLink>
         <NavLink to="/bookmark" className="overview-link bookmark-cont">
-          <div className="bookmark-icon"></div>
-          Bookmarks
+          <BsBookmarks className="bookmark-icon" />
+          <p>Bookmarks</p>
         </NavLink>
         <NavLink to="/team-blog" className="overview-link team-blog-cont">
-          <div className="team-blogs-icon"></div>
-          Team blogs
+          <AiOutlineTeam className="team-blogs-icon" />
+          <p>Team blogs</p>
         </NavLink>
         <NavLink to="/draft" className="overview-link draft-cont">
-          <div className="drafts-icon"></div>
-          Drafts
+          <MdOutlineDrafts className="drafts-icon" />
+          <p>Drafts</p>
         </NavLink>
         <NavLink to="/analytics" className="overview-link analytics-cont">
-          <div className="analytics-icon"></div>
-          Analytics
+          <MdOutlineAnalytics className="analytics-icon" />
+          <p>Analytics</p>
         </NavLink>
       </div>
       <div className="trending-cont">
@@ -58,16 +87,21 @@ const BlogNav = () => {
         <h2>Personal</h2>
         <div className="personal-links">
           <NavLink to="/account" className="personal-link acc-cont">
-            <div className="account-icon"></div>
+            <VscAccount className="account-icon" />
             Account
           </NavLink>
           <NavLink to="/notifications" className="personal-link notify-cont">
-            <div className="notifications-icon"></div>
+            <MdOutlineNotificationsNone className="notifications-icon" />
             Notifications
           </NavLink>
         </div>
       </div>
+      <div className="logout">
+        <button onClick={handleLogout}>Log out</button>
+      </div>
+      {/* </div> */}
     </div>
+    </>
   );
 };
 

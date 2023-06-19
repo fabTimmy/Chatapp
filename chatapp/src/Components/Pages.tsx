@@ -9,9 +9,28 @@ import Blogs from "./Blogs";
 import { AuthProvider } from "./Context/AuthContext";
 import { PrivateRoute } from "../PrivateRoute";
 import Feed from "./Blog-cont/Feed";
+import { useEffect } from "react";
+import { auth } from "../firebase";
+import { useAppDispatch } from "../Hooks/StoreHook";
+import { signin } from "../Features/AuthSlice";
 
 
 const Pages = () => {
+
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async user => {
+      if(user && user.email) dispatch(signin({
+        email: user.email,
+        id: user.uid,
+        photoUrl: user?.photoURL || null,
+      }))
+    }) 
+
+    return unsubscribe();
+  }, [dispatch])
+
   return (
     <AuthProvider>
       <Routes>
