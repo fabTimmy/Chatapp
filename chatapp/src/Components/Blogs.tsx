@@ -1,11 +1,11 @@
-// import Nav from "./Nav";
+import Nav from "./Nav";
 import BlogNav from "./BlogNav";
 
 
 const Blogs = () => {
   return (
     <div className="blog">
-      {/* <Nav /> */}
+      <Nav />
       <div className="blog-sect">
         <BlogNav />
         <div className="blog-cont">

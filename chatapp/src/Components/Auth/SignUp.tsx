@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { auth, provider, googleProvider, db } from "../../firebase";
-import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { 
+  FacebookAuthProvider, 
+  createUserWithEmailAndPassword, 
+  signInWithPopup, 
+  updateProfile 
+} from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
 import { setDoc, doc } from "firebase/firestore";
 import { AiFillFacebook } from "react-icons/ai";
@@ -14,6 +19,7 @@ import { AuthForm, authFormSchema } from "../../Models/Form";
 import { useDispatch } from "react-redux";
 import { signin } from "../../Features/AuthSlice";
 import { useAppSelector } from "../../Hooks/StoreHook";
+import { Bars } from "react-loader-spinner";
 
 const SignUp = () => {
   const [visible, setVisible] = useState<true | false>(false);
@@ -30,7 +36,7 @@ const SignUp = () => {
   
   useEffect(() => {
     if (Boolean(user)){
-      // navigate("/");
+      // navigate("/");'
 
     }
   }, [user, navigate])
@@ -60,7 +66,13 @@ const SignUp = () => {
     } catch (error: any) {
       setLoading(false);
       const errorCode = error.code;
-      setIsError(errorCode);
+      if(errorCode === 'auth/email-already-in-use'){
+        setIsError("Email is already registered")
+      } else if (errorCode === 'auth/network-request-failed'){
+        setIsError('No internet Connection');
+      } else {
+        setIsError(error.message);
+      }
     }
   };
 
@@ -71,6 +83,20 @@ const SignUp = () => {
   } = useForm<AuthForm>({
     resolver: yupResolver(authFormSchema),
   });
+
+  const fetchData = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000)
+  }
+
+  if (loading)
+    return (
+      <span>
+        <Bars width={50} height={50} color="black" />
+      </span>
+    );
 
   // sign in with google
   const GoogleLogin = async () => {
@@ -93,6 +119,10 @@ const SignUp = () => {
   const FacebookLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
+      const credential = FacebookAuthProvider.credentialFromResult(result);
+      const token = credential?.accessToken;
+      let photoURL = result.user.photoURL + '?height=500&access_token' + token;
+      // await updateProfile(auth.currentUser, {photoURL: photoURL}) 
       console.log(result.user);
       navigate("/feed");
       console.log(result.user.providerData);
@@ -122,7 +152,7 @@ const SignUp = () => {
               LOGIN
             </NavLink>
           </div>
-          <div className="err-dis">{isError && <p>{isError}</p>}</div>
+          <div className="err-dis-1">{isError && <p>{isError}</p>}</div>
           <form onSubmit={handleSubmit(handleFormSubmit)}>
             <h1>Register as a Writer/Reader</h1>
 
@@ -136,7 +166,7 @@ const SignUp = () => {
                   {...register("firstName")}
                 />
                 {errors.firstName ? (
-                  <span style={{ color: "red", fontSize: 12, marginBottom: 4 }}>
+                  <span className="yup-err">
                     {errors.firstName.message}
                   </span>
                 ) : (
@@ -152,7 +182,7 @@ const SignUp = () => {
                   {...register("lastName")}
                 />
                 {errors.lastName ? (
-                  <span style={{ color: "red", fontSize: 12, marginBottom: 4 }}>
+                  <span className="yup-err">
                     {errors.lastName.message}
                   </span>
                 ) : (
@@ -171,7 +201,7 @@ const SignUp = () => {
               <label htmlFor="email">Email address</label>
               <input type="email" placeholder="Email" {...register("email")} />
               {errors.email ? (
-                <span style={{ color: "red", fontSize: 12, marginBottom: 4 }}>
+                <span className="yup-err">
                   {errors.email.message}
                 </span>
               ) : (
@@ -185,7 +215,7 @@ const SignUp = () => {
                   {...register("password")}
                 />
                 {errors.password ? (
-                  <span style={{ color: "red", fontSize: 12, marginBottom: 4 }}>
+                  <span className="yup-err">
                     {errors.password.message}
                   </span>
                 ) : (
@@ -207,7 +237,7 @@ const SignUp = () => {
                   {...register("confirmPassword")}
                 />
                 {errors.confirmPassword ? (
-                  <span style={{ color: "red", fontSize: 12, marginBottom: 4 }}>
+                  <span className="yup-err">
                     {errors.confirmPassword.message}
                   </span>
                 ) : (
@@ -224,8 +254,15 @@ const SignUp = () => {
               </div>
             </div>
             <br />
-            <button disabled={loading} type="submit" className="btn">
-              Create account
+            <button onClick={fetchData} type="submit" className="btn">
+              <div className="spinner" >
+              {loading && <span><Bars
+              width={20}
+              height={20}
+              color='black'
+              /></span>}
+              </div>
+              {!loading && <span>Create account</span>}
             </button>
           </form>
           <div className="socials">

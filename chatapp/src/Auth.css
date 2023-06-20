@@ -9,7 +9,6 @@
       position: relative;
       top: 2rem;
       height: 51rem !important;
-      gap: 2rem;
       margin: auto;
       box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0),
         0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
@@ -34,7 +33,7 @@
       border-radius: 1rem 0 0 1rem;
       margin: auto;
       gap: 1.2rem;
-      padding: 18rem 1rem;
+      padding: 21rem 2rem;
     }
     .signup-img-text p {
       flex: 1;
@@ -51,12 +50,12 @@
     }
     .sign-in-cont h1 {
       font-size: 1.3rem;
-      margin-bottom: 1rem;
-      margin-top: 0.5rem;
+      margin: 1rem 0 2rem 0;
       width: 25rem;
       text-align: center;
     }
     .sign-in-cont label {
+      margin-top: .4rem;
       font-size: 0.8rem;
     }
     .names-cont {
@@ -69,7 +68,7 @@
     #profession {
       width: 100%;
       padding: 0.7rem;
-      margin: 0.6rem 0;
+      margin: 0.3rem 0;
       border-radius: 0.4rem;
       cursor: pointer;
       border: 0.3px solid var(--s-border-color);
@@ -77,10 +76,6 @@
     .names-cont input:hover,
     .names-cont-1 input:hover,
     #profession:hover {
-      width: 100%;
-      padding: 0.7rem;
-      margin: 0.6rem 0;
-      border-radius: 0.4rem;
       transition: 1s ease-in-out all;
       border: 0.3px solid var(--btn-color);
     }
@@ -122,10 +117,10 @@
       background-color: var(--White);
       border: 0.3px solid var(--s-border-color);
       font-family: var(--font-family-headings);
+      transition: 1s ease-in-out all;
     }
     .socials button:hover {
       background-color: var(--text-bg-1);
-      padding: 0.9rem 1rem;
       border: 0.3px solid var(--btn-color);
     }
     .nav-icon{
@@ -162,6 +157,48 @@
       border-bottom: 4px solid var(--btn-color);
     }
     /* log-in */
+    .signin-cont {
+      display: flex;
+      place-content: center;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--White);
+      width: 56rem;
+      position: relative;
+      top: 2rem;
+      height: 44.5rem !important;
+      margin: auto;
+      box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0),
+        0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+      border-radius: 1rem;
+      margin-bottom: 4rem;
+    }
+    .signin-img{
+  
+        height: 44.5rem !important;
+    }
+    .signin-img-text {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url(./Image/unsplash_9pjBx5uVBlg.png);
+      background-repeat: no-repeat;
+      height: 44.5rem !important;
+      background-size: contain;
+      flex: 1;
+      color: var(--White);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 1rem 0 0 1rem;
+      margin: auto;
+      gap: 1.2rem;
+      padding: 17rem 2rem;
+    }
+    .signin-img-text p {
+      flex: 1;
+      width: 23rem;
+      line-height: 1.5rem;
+    }
+
     .sign-up-cont-2 {
       display: flex;
       flex-direction: column;
@@ -172,7 +209,7 @@
   }
     .sign-up-cont-2 h1 {
       text-align: center;
-      margin: 3rem 0;
+      margin: 2rem 0;
   }
   .names-cont-2 input{
       width: 100%;
@@ -240,17 +277,21 @@
       padding: 1rem;
       min-height: 37rem;
     }
-    .signup-img-text {
+    .signup-img-text, .signin-img-text {
       display: none;
-      flex: 0;
     }
     .sign-in-cont {
       display: flex;
       flex-direction: column;
-      flex: 0 0;
-      padding: 1rem;
-      width: 100% !important;
+      padding: 1rem 2rem;
+      min-width: 100% !important;
       margin: auto;
+    }
+    /* login */
+    .signin-cont{
+      width: 35rem;
+      padding: 6rem 0 0 0;
+      height: 35rem !important;
     }
   }
   
@@ -264,7 +305,7 @@
       width: 37rem;
       position: relative;
       top: 2rem;
-      min-height: 40rem !important;
+      height: 54rem !important;
       margin: auto;
       box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0),
         0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
@@ -275,16 +316,14 @@
       flex-direction: column;
       gap: 0;
       flex: 0;
-      padding: 1rem 1rem !important;
-      width: 110% !important;
+      padding: 1rem 3rem !important;
+      min-width: 100% !important;
       margin: auto;
     }
     .sign-in-cont h1 {
       font-size: 1.3rem;
-      margin-bottom: 1rem;
-      margin-top: 0.5rem;
-      width: 19rem;
-      text-align: center;
+      margin: 1.5rem 0 2rem 0;
+      text-align: center !important;
     }
     .sign-in-cont label {
       font-size: 0.8rem;
@@ -301,8 +340,9 @@
       padding: 0.7rem;
       margin: 0.6rem 0;
       border-radius: 0.4rem;
-      border: 0.3px solid var(--Black);
+      border: 0.3px solid var(--s-border-color);;
     }
+    
     .sign-in-cont .btn {
       border-radius: 0.4rem;
       cursor: pointer;
@@ -314,6 +354,7 @@
       font-size: 1.1rem;
       font-weight: 400;
       transition: 1s ease all;
+      position: relative;
       font-family: var(--font-family-headings);
     }
     .names-cont-1 {
@@ -380,6 +421,22 @@
     }
     
     /* log-in */
+    .signin-cont {
+      padding: 6rem 0 0 0;
+      display: flex;
+      place-content: center;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--White);
+      width: 35rem;
+      position: relative;
+      top: 2rem;
+      height: 35rem !important;
+      margin: auto;
+      box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0),
+        0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+      border-radius: 1rem;
+    }
     .sign-up-cont-2 {
       display: flex;
       flex-direction: column;
@@ -390,7 +447,7 @@
   }
     .sign-up-cont-2 h1 {
       text-align: center;
-      margin: 3rem 0;
+      margin: 2rem 0;
   }
   .names-cont-2 input{
       width: 100%;
@@ -446,7 +503,7 @@
   }
   
   @media (max-width: 586px) {
-    .register-cont {
+    .register-cont, .signin-cont {
       width: 100%;
       margin: auto !important;
       box-shadow: none;

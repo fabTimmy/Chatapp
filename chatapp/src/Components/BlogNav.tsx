@@ -1,11 +1,10 @@
 import { signOut } from "firebase/auth";
 import { NavLink } from "react-router-dom";
 import { auth } from "../firebase";
-import { BsBookmarks, BsSearch } from 'react-icons/bs';
-import { VscAccount } from 'react-icons/vsc';
-import { AiOutlineMenu, AiOutlineTeam } from 'react-icons/ai';
-import { MdOutlineAnalytics, MdOutlineDrafts, MdOutlineFeedback, MdOutlineNotificationsNone } from "react-icons/md";
-import { useAppDispatch, useAppSelector } from "../Hooks/StoreHook";
+import { BsBookmarks } from 'react-icons/bs';
+import { AiOutlineTeam } from 'react-icons/ai';
+import { MdOutlineAnalytics, MdOutlineDrafts, MdOutlineFeedback, MdOutlineManageAccounts, MdOutlineNotificationsNone } from "react-icons/md";
+import { useAppDispatch } from "../Hooks/StoreHook";
 import { signout } from "../Features/AuthSlice";
 // import { useEffect } from "react";
 
@@ -87,7 +86,7 @@ const BlogNav = () => {
         <h2>Personal</h2>
         <div className="personal-links">
           <NavLink to="/account" className="personal-link acc-cont">
-            <VscAccount className="account-icon" />
+            <MdOutlineManageAccounts className="account-icon" />
             Account
           </NavLink>
           <NavLink to="/notifications" className="personal-link notify-cont">

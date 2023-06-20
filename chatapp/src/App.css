@@ -16,6 +16,15 @@ html {
   color: var(--Light-Red-error);
   font-weight: bold;
 }
+.spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.yup-err{
+  color: var(--Light-Red-error);
+  font-size: 12px;
+}
 /* navbar */
 .navBarSection {
   position: fixed;
@@ -405,12 +414,17 @@ html {
   text-align: center;
   color: var(--Light-Red-error);
 }
-.err-dis p {
+.err-dis-1 {
+  text-align: center;
+  color: var(--Light-Red-error);
+}
+.err-dis p, .err-dis-1 p {
   color: var(--Light-Red-error);
   padding: 0.6rem;
   border-radius: 0.5rem;
   border: 1px solid var(--Light-Red-error);
 }
+
 .notFound {
   display: flex;
   flex-direction: column;

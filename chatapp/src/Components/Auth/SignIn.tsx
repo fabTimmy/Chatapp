@@ -8,6 +8,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import ResetPwd from "../ResetPwd";
+import { Bars } from "react-loader-spinner";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ const SignIn = () => {
   const [visible, setVisible] = useState<true | false>(false);
   const [errors, setErrors] = useState("");
   const [resetPassword, setResetPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [resetPasswordEmail, setResetPasswordEmail] = useState("");
   const [resetPasswordSuccess, setResetPasswordSuccess] = useState<
     string | null
@@ -65,6 +67,20 @@ const SignIn = () => {
     }
   };
 
+  const fetchData = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  };
+
+  if (loading)
+    return (
+      <span>
+        <Bars width={50} height={50} color="black" />
+      </span>
+    );
+
   const toggleShowPwd = () => {
     setVisible(!visible);
   };
@@ -80,9 +96,9 @@ const SignIn = () => {
         handlePasswordReset={handlePasswordReset}
       />
       <section>
-        <div className="register-cont">
-          <div className="signup-img">
-            <div className="signup-img-text">
+        <div className="signin-cont">
+          <div className="signin-img">
+            <div className="signin-img-text">
               <h1>CHATTER</h1>
               <p>
                 Unleash the Power of Words, Connect with Like-minded Readers and
@@ -138,8 +154,15 @@ const SignIn = () => {
                 </div>
               </div>
 
-              <button onClick={handleSubmit} type="submit" className="btn">
-                Log in
+              <button onClick={fetchData} type="submit" className="btn">
+                <div className="spinner">
+                  {loading && (
+                    <span>
+                      <Bars width={20} height={20} color="black" />
+                    </span>
+                  )}
+                </div>
+                {!loading && <span>Log in</span>}
               </button>
             </form>
           </div>

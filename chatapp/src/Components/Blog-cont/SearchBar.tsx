@@ -48,7 +48,7 @@ const SearchBar: React.FC<Props> = ({data}) => {
           {user ? ( 
           <Link to="/profile">
             {user?.photoUrl ? (
-              <img src={user?.photoUrl} alt="avatar" />
+              <img src={user?.photoUrl} alt="" />
             ) : (
               <div>{user?.email[0].toUpperCase()}</div>
             )}
