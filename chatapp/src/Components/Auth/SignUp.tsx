@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { auth, provider, googleProvider, db } from "../../firebase";
+import { auth, provider, googleProvider, db } from "../../Config/firebase";
 import { 
-  FacebookAuthProvider, 
   createUserWithEmailAndPassword, 
-  signInWithPopup, 
-  updateProfile 
+  signInWithPopup
 } from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
 import { setDoc, doc } from "firebase/firestore";
@@ -34,12 +32,6 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const { user } = useAppSelector(state => state.auth)
   
-  useEffect(() => {
-    if (Boolean(user)){
-      // navigate("/");'
-
-    }
-  }, [user, navigate])
   
   const handleFormSubmit = async (data: AuthForm) => {
     const { email, password } = data;
@@ -84,19 +76,14 @@ const SignUp = () => {
     resolver: yupResolver(authFormSchema),
   });
 
-  const fetchData = () => {
+  const fetchData = async () => {
     setLoading(true);
-    setTimeout(() => {
+    await fetch('/').then(() => {
+      // console.log('fetch success');
+    });
       setLoading(false);
-    }, 2000)
-  }
+  };
 
-  if (loading)
-    return (
-      <span>
-        <Bars width={50} height={50} color="black" />
-      </span>
-    );
 
   // sign in with google
   const GoogleLogin = async () => {
@@ -110,7 +97,7 @@ const SignUp = () => {
             photoUrl: user.photoURL || null,
           })
         );
-      navigate("/feed");
+      navigate("/blogs/feed/article");
     } catch (error) {
       console.log("Error signing in:", error);
     }
@@ -119,12 +106,12 @@ const SignUp = () => {
   const FacebookLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      const credential = FacebookAuthProvider.credentialFromResult(result);
-      const token = credential?.accessToken;
-      let photoURL = result.user.photoURL + '?height=500&access_token' + token;
+      // const credential = FacebookAuthProvider.credentialFromResult(result);
+      // const token = credential?.accessToken;
+      // let photoURL = result.user.photoURL + '?height=500&access_token' + token;
       // await updateProfile(auth.currentUser, {photoURL: photoURL}) 
       console.log(result.user);
-      navigate("/feed");
+      navigate("/blogs/feed/article");
       console.log(result.user.providerData);
     } catch (error) {
       console.log(error);

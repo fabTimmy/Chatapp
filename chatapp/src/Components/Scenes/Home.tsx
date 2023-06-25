@@ -1,9 +1,9 @@
 import Nav from "./Nav";
-import About from "./Sections/About";
-import Main from "./Sections/Main";
-import Join from "./Sections/Join";
-import Share from "./Sections/Share";
-import Footer from "./Sections/Footer";
+import About from "../Sections/About";
+import Main from "../Sections/Main";
+import Join from "../Sections/Join";
+import Share from "../Sections/Share";
+import Footer from "../Sections/Footer";
 
 const Home = () => {
   return (

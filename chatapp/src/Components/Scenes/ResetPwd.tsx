@@ -1,5 +1,6 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import { Dispatch, FC, SetStateAction, useState } from "react";
 import { GrClose } from "react-icons/gr";
+import { Bars } from "react-loader-spinner";
 
 interface ResetPwdProps {
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface ResetPwdProps {
 }
 
 const ForgetPwd: FC<ResetPwdProps> = (props) => {
+  const [loading] = useState(false)
   const {
     isOpen,
     onClose,
@@ -40,7 +42,14 @@ const ForgetPwd: FC<ResetPwdProps> = (props) => {
           required
         />
         <button onClick={handlePasswordReset} className="reset-btn">
-          Reset Password
+        <div className="spinner">
+                  {loading && (
+                    <span>
+                      <Bars width={20} height={20} color="black" />
+                    </span>
+                  )}
+                </div>
+                {!loading && <span>Reset Password</span>}
         </button>
         {resetPasswordSuccess && <p className="success-msg">{resetPasswordSuccess}</p>}
         {resetPasswordError && <p className="fail-msg">{resetPasswordError}</p>}

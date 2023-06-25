@@ -1,16 +1,20 @@
-import './App.css';
-import './Root.css';
-import './Menu.css';
-import './Auth.css';
-import './Media.css';
-import './BlogNav.css';
-import Pages from './Components/Pages';
+import './Style/App.css';
+import './Style/Root.css';
+import './Style/Menu.css';
+import './Style/Auth.css';
+import './Style/Media.css';
+import './Style/BlogNav.css';
+import Pages from './Components/Route/Pages';
+// import { ColorModeContext, useMode } from './Features/Theme';
+// import { CssBaseline, ThemeProvider } from '@mui/material';
 
-function App() {
+const App = () => {
+  // const [theme, colorMode] = useMode();
+
   return (
-    <div className="App">
-      <Pages/>
-    </div>
+        <div className="App">
+          <Pages />
+        </div>
   );
 }
 

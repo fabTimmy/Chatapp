@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { auth } from "../../firebase";
+import { auth } from "../../Config/firebase";
 import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
@@ -7,7 +7,7 @@ import {
 import { NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-import ResetPwd from "../ResetPwd";
+import ResetPwd from "../Scenes/ResetPwd";
 import { Bars } from "react-loader-spinner";
 
 const SignIn = () => {
@@ -34,7 +34,7 @@ const SignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
-        navigate("/feed");
+        navigate("/blogs/feed");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -46,7 +46,10 @@ const SignIn = () => {
           setErrors("Invalid Email/Password");
         } else if (errorCode === "auth/network-request-failed") {
           setErrors("No internet Connection");
-        } else {
+        } else if (errorCode === "auth/internal-error") {
+          setErrors("Error signing in");
+        } 
+        else {
           setErrors(error.message);
         }
       });
@@ -61,25 +64,24 @@ const SignIn = () => {
       );
       setResetPasswordError(null);
     } catch (error: any) {
+      const errCode = error.code;
       const errorMsg = error.message;
-      setResetPasswordError(errorMsg);
+      if (errCode === "auth/network-request-failed"){
+        setResetPasswordError("No internet Connection");
+      } else {
+        setResetPasswordError(errorMsg);
+      }
       setResetPasswordSuccess(null);
     }
   };
 
-  const fetchData = () => {
+  const fetchData = async () => {
     setLoading(true);
-    setTimeout(() => {
+    await fetch('/').then(() => {
+      // console.log('fetch success');
+    });
       setLoading(false);
-    }, 2000);
   };
-
-  if (loading)
-    return (
-      <span>
-        <Bars width={50} height={50} color="black" />
-      </span>
-    );
 
   const toggleShowPwd = () => {
     setVisible(!visible);
@@ -139,7 +141,7 @@ const SignIn = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                  <div className="eyes" onClick={toggleShowPwd}>
+                  <div className="eyes-1" onClick={toggleShowPwd}>
                     {visible ? (
                       <AiOutlineEye className="eye-icon" />
                     ) : (

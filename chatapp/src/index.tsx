@@ -4,7 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from "./ErrorPage/ErrorBoundary";
 import App from "./App";
 import { Provider } from "react-redux";
-import { store } from "./Store";
+import { store } from "./Models/Store";
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from "react-toastify";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,6 +18,7 @@ root.render(
         <Provider store={store}>
           <Routes>
             <Route path="/*" element={<App />} />
+            <Route path="/*" element={<ToastContainer />} />
           </Routes>
         </Provider>
       </Router>

@@ -2,17 +2,19 @@
   --btn-color: #39ad31;
   --Fb-bg: #077ef5;
   /* neutral */
-  --White: hsl(0, 0%, 100%);
+  --s-border-color: #d9d9d9;
+  --border-color: #d0d0d0;
   --Black: #000;
+  --White: hsl(0, 0%, 100%);
   --Light-brown: #c5c6c7;
   --one-px: 0.0625rem;
   --font-family: "DM Sans", sans-serif;
   --cream-bg: rgba(255, 237, 204, 0.5);
-  --text-bg: #626262;
   --text-bg-1: #b4b4b43f;
-  --border-color: #d0d0d0;
-  --join-us-bg: #fcf6f5;
   --foot-links: #111111;
-  --s-border-color: #d9d9d9;
-  --Light-Red-error: red;
+  --Light-Red-error: red; 
+  /* indigo */
+  --text-bg: #626262; 
+  /* white */
+  --join-us-bg: #fcf6f5; 
 }
