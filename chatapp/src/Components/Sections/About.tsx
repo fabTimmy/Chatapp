@@ -1,4 +1,3 @@
-import React from 'react'
 import Nav from '../Scenes/Nav'
 
 const About = () => {
@@ -9,9 +8,9 @@ const About = () => {
         <div className="sect-1">
           <div className="sect-1-container">
             <div className="sect-1-text">
-              <h1>About Chatter</h1>
+              <h1>About Z-chat</h1>
               <p>
-                Chatter is a multi-functional platform where authors and readers
+                Z-Chat is a multi-functional platform where authors and readers
                 can have access to their own content. It aims to be a
                 traditional bookworm’s heaven and a blog to get access to more
                 text based content. Our vision is to foster an inclusive and
@@ -30,7 +29,7 @@ const About = () => {
           </div>
           <div className="sect-1-aside">
             <div className="head">
-              <h1>Why you should join chatter</h1>
+              <h1>Why you should join Z-chat</h1>
               <p>
                 Our goal is to make writers and readers see our platform as
                 their next heaven for blogging, ensuring ease in interactions,
@@ -42,8 +41,8 @@ const About = () => {
             <div className="aside">
               <div className="aside-cards">
                 <div className="card-1">
-                  <div className="img">
-                    <img src="../../Image/carbon_analytics.jpg" alt="" />
+                  <div className="card-img-cont">
+                  <div className="img"></div>
                   </div>
                   <h1>Analytics</h1>
                   <p>
@@ -53,8 +52,9 @@ const About = () => {
                   </p>
                 </div>
                 <div className="card-2">
+                  <div className="card-img-cont">
                   <div className="img">
-                    <img src="" alt="" />
+                  </div>
                   </div>
                   <h1>Social interactions</h1>
                   <p>
@@ -63,8 +63,9 @@ const About = () => {
                   </p>
                 </div>
                 <div className="card-3">
+                  <div className="card-img-cont">
                   <div className="img">
-                    <img src="" alt="" />
+                  </div>
                   </div>
                   <h1>Content creation</h1>
                   <p>

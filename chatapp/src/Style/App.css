@@ -9,6 +9,7 @@ html {
 }
 body{
   font-family: var(--font-family) !important;
+  min-width: 100%;
 }
 ::-webkit-scrollbar{
   width: 5px;
@@ -37,6 +38,13 @@ body{
 .yup-err{
   color: var(--Light-Red-error);
   font-size: 12px;
+  margin-bottom: .4rem;
+}
+.y-err{
+  margin-top: .4rem !important;
+}
+.y-err-1{
+  margin-top: -1rem !important;
 }
 /* article */
 .article-cont{
@@ -147,6 +155,7 @@ body{
   display: flex;
   flex-direction: column;
   gap: .5rem;
+  /* background-color: darkcyan; */
 }
 .p-user{
   width: 4rem;
@@ -239,16 +248,16 @@ body{
 #desc, .title{
   padding: 1rem;
   font-size: 1.5rem;
-  border: none;
+  border-radius: .6rem;
+  border: 1px solid var(--Light-brown);
+}
+.up-cont{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 .up-img{
-  border-radius: 50%;
-  width: 5rem;
-  height: 5rem;
   cursor: pointer;
-  border: 1px solid var(--Black);
-  object-fit: cover;
-  display: flex;
   place-items: center;
 }
 

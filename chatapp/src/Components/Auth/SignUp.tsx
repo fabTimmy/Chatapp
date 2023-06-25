@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { auth, provider, googleProvider, db } from "../../Config/firebase";
 import { 
   createUserWithEmailAndPassword, 
@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import { AuthForm, authFormSchema } from "../../Models/Form";
 import { useDispatch } from "react-redux";
 import { signin } from "../../Features/AuthSlice";
-import { useAppSelector } from "../../Hooks/StoreHook";
+// import { useAppSelector } from "../../Hooks/StoreHook";
 import { Bars } from "react-loader-spinner";
 
 const SignUp = () => {
@@ -30,7 +30,7 @@ const SignUp = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useAppSelector(state => state.auth)
+  // const { user } = useAppSelector(state => state.auth)
   
   
   const handleFormSubmit = async (data: AuthForm) => {
@@ -61,6 +61,8 @@ const SignUp = () => {
       if(errorCode === 'auth/email-already-in-use'){
         setIsError("Email is already registered")
       } else if (errorCode === 'auth/network-request-failed'){
+        setIsError('No internet Connection');
+      } else if (errorCode === 'auth/internal-error'){
         setIsError('No internet Connection');
       } else {
         setIsError(error.message);
@@ -97,24 +99,38 @@ const SignUp = () => {
             photoUrl: user.photoURL || null,
           })
         );
-      navigate("/blogs/feed/article");
-    } catch (error) {
-      console.log("Error signing in:", error);
+      navigate("/blogs/feed");
+    } catch (error: any) {
+      const errorCode = error.code;
+      if(errorCode === 'auth/email-already-in-use'){
+        setIsError("Email is already registered")
+      } else if (errorCode === 'auth/network-request-failed'){
+        setIsError('No internet Connection');
+      } else if (errorCode === 'auth/internal-error'){
+        setIsError('No internet Connection');
+      } else {
+        setIsError(error.message);
+      }
     }
   };
   // sign in with facebook
   const FacebookLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      // const credential = FacebookAuthProvider.credentialFromResult(result);
-      // const token = credential?.accessToken;
-      // let photoURL = result.user.photoURL + '?height=500&access_token' + token;
-      // await updateProfile(auth.currentUser, {photoURL: photoURL}) 
       console.log(result.user);
-      navigate("/blogs/feed/article");
+      navigate("/blogs/feed");
       console.log(result.user.providerData);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      const errorCode = error.code;
+      if(errorCode === 'auth/email-already-in-use'){
+        setIsError("Email is already registered")
+      } else if (errorCode === 'auth/network-request-failed'){
+        setIsError('No internet Connection');
+      } else if (errorCode === 'auth/internal-error'){
+        setIsError('No internet Connection');
+      } else {
+        setIsError(error.message);
+      }
     }
   };
 
@@ -161,7 +177,7 @@ const SignUp = () => {
                 )}
               </div>
               <div>
-                <label htmlFor="LastName">Last name</label>
+                <label htmlFor="LastName" className="y-err-1">Last name</label>
                 <input
                   type="text"
                   placeholder="Last name"
@@ -169,7 +185,7 @@ const SignUp = () => {
                   {...register("lastName")}
                 />
                 {errors.lastName ? (
-                  <span className="yup-err">
+                  <span className="yup-err y-err">
                     {errors.lastName.message}
                   </span>
                 ) : (
@@ -178,7 +194,7 @@ const SignUp = () => {
               </div>
             </div>
             <div className="names-cont-1">
-              <label htmlFor="cars">You are joining as?</label>
+              <label htmlFor="cars" className="y-err">You are joining as?</label>
 
               <select name="profession" id="profession">
                 <option value="writer">Writer</option>
@@ -202,7 +218,7 @@ const SignUp = () => {
                   {...register("password")}
                 />
                 {errors.password ? (
-                  <span className="yup-err">
+                  <span className="yup-err y-err">
                     {errors.password.message}
                   </span>
                 ) : (
@@ -216,7 +232,7 @@ const SignUp = () => {
                   )}
                 </div>
               </div>
-              <label htmlFor="confirm-pwd">Confirm password</label>
+              <label htmlFor="confirm-pwd" className="y-err">Confirm password</label>
               <div className="pwd-cont">
                 <input
                   type={inputTypes}

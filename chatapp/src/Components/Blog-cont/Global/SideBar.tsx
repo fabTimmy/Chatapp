@@ -10,26 +10,17 @@ import { HiMenuAlt2 } from 'react-icons/hi'
 import { signout } from "../../../Features/AuthSlice";
 
 import { useState } from "react";
-// import { useEffect } from "react";
 
 
 const BlogNav = () => {
   const [open, setOpen] = useState(true);
 
-  // const { user } = useAppSelector(state => state.auth)
   const dispatch = useAppDispatch()
-  // const navigate = useNavigate()
 
   const handleLogout = async () => {
     await signOut(auth);
     dispatch(signout());
   }
-
-  // useEffect(() => {
-  //   if(Boolean(!user)){
-  //     navigate('/signin');
-  //   }
-  // }, [navigate, user])
 
   return (
     
@@ -37,7 +28,7 @@ const BlogNav = () => {
       <div className='back-cont'  >
         <HiMenuAlt2 className='back' onClick={() => setOpen(!open)} />
       </div>
-      <h3 className={`p-text ${!open ? 'p-m' : ''}`}>Overview</h3>
+      <h2 className={`p-text ${!open ? 'p-m' : ''}`}>Overview</h2>
       <div className="overview-cont">
         <NavLink to="feed" className="overview-link feed-cont">
           <MdOutlineFeedback className={`feed-icon ${!open ? 'p-i' : ''}`} />

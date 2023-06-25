@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, FacebookAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, FacebookAuthProvider, GoogleAuthProvider, updateProfile } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { getStorage } from 'firebase/storage';
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -22,4 +22,18 @@ const auth = getAuth(app);
 const provider = new FacebookAuthProvider();
 const googleProvider = new GoogleAuthProvider();
 
-export { auth, provider, googleProvider, app, db, storage }
+// Storage
+const upLoad = async (file: any, user: { uid: string; }, setLoading: any) => {
+  
+  const fileRef = ref(storage, user.uid + '.png');
+
+  setLoading(true);
+  const snapShot = await uploadBytes(fileRef, file)
+
+  // updateProfile(user, {photoURL: '.././Image/unknownUser.png'});
+
+  setLoading(false);
+  alert('Uploaded File')
+}
+
+export { auth, provider, googleProvider, app, db, storage, upLoad }

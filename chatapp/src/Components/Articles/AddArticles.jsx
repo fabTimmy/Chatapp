@@ -2,21 +2,22 @@ import { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { db, auth, storage } from "../../Config/firebase";
-import { ref, uploadBytes, listAll, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
-import { v4 } from 'uuid';
+// import { v4 } from 'uuid';
 import { Bars } from "react-loader-spinner";
 
 const AddArticles = () => {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
-  const [postImage, setPostImage] = useState(null);
+  // const [postImage, setPostImage] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [listImage, setListImage] = useState([]);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     image: '',
 })
+  const [isOpen, setIsOpen] = useState(false)
 
   const navigate = useNavigate();
   const postCollectionRef = collection(db, "posts");
@@ -34,14 +35,14 @@ const AddArticles = () => {
     });
     navigate('/blogs/feed/article');
     
-    if (postImage == null) return;
-    const imageRef = ref(storage, `images/${postImage.name + v4()}`)
-    uploadBytes(imageRef, postImage).then((snapShot) => {
-      getDownloadURL(snapShot.ref).then((url) => {
-        setListImage((prev) => [...prev, url])
-      })
-    })
-    navigate('/blogs/feed/article');
+    // if (postImage == null) return;
+    // const imageRef = ref(storage, `images/${postImage.name + v4()}`)
+    // uploadBytes(imageRef, postImage).then((snapShot) => {
+    //   getDownloadURL(snapShot.ref).then((url) => {
+    //     setListImage((prev) => [...prev, url])
+    //   })
+    // })
+    // navigate('/blogs/feed/article');
 
     setLoading(true);
     await fetch('/').then(() => {
@@ -71,6 +72,10 @@ const AddArticles = () => {
     })
   }, [imageListRef])
 
+  const menuShow = () => {
+    setIsOpen(!isOpen)
+  }
+
 
   // const fetchData = async () => {
   //   setLoading(true);
@@ -95,7 +100,6 @@ const AddArticles = () => {
             </button>
         </div>
         <div className="pub-cont">
-          <BsPlusLg className="plus" />
           <div className="pub-text">
             <input
               type="text"
@@ -116,6 +120,9 @@ const AddArticles = () => {
                 setPostText(e.target.value);
               }}
             />
+            <div className="up-cont">
+              <BsPlusLg className="plus" onClick={menuShow} />
+            {isOpen && 
             <input
               type="file"
               name="image"
@@ -123,6 +130,8 @@ const AddArticles = () => {
               className="up-img"
               onChange={(e) => handleImageChange(e)}
             />
+          }
+            </div>
           </div>
         </div>
       </div>

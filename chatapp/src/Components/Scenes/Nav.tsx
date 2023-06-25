@@ -1,10 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
-import { RxHamburgerMenu } from 'react-icons/rx'
 import { MdClose } from 'react-icons/md'
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../Hooks/StoreHook";
 import { signOut } from "firebase/auth";
 import { auth } from "../../Config/firebase";
+import { HiMenuAlt3 } from "react-icons/hi";
 
 
 const Nav = () => {
@@ -25,7 +25,7 @@ const Nav = () => {
     <div className="header">
       <div className="menu-icon">
         <div className="logo-1">Z-chat</div>
-        <RxHamburgerMenu className="ham-menu" onClick={menuShow} />
+        <HiMenuAlt3 className="ham-menu" onClick={menuShow} />
       </div>
       <nav className={active ? 'slider active' : 'slider'} >
         <div className="logo">Z-chat</div>
@@ -36,7 +36,7 @@ const Nav = () => {
           <li><NavLink to='/'>Home</NavLink></li>
           <li><NavLink to='/about'>About us</NavLink></li>
           <li><NavLink to='/contact'>Contact</NavLink></li>
-          <li><NavLink to='/blogs/feed/article'>Blogs</NavLink></li>
+          <li><NavLink to='/blogs/feed'>Blogs</NavLink></li>
         </ul>
         <div className="nav-btn">
           {!user ? (
@@ -51,11 +51,11 @@ const Nav = () => {
               <img src={user?.photoUrl} alt="" className="photourl" />
             ) : (
               <div className="picurl">
-                <p>{user?.email[0].toUpperCase()}</p>
+                <p><img src="../../Image/unknownUser.png" alt="avatar"/></p>
               </div>
             )}
           </Link>
-          <button  type='submit' onClick={userSignout}className="btn btn-3">Log out</button>
+          <Link to='/signin'  type='submit' onClick={userSignout}><button className="btn btn-3">Log out</button></Link>
             </>
           )}
         </div>

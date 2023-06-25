@@ -1,4 +1,3 @@
-import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 const Main = () => {
@@ -6,7 +5,7 @@ const Main = () => {
     <main id="home">
       <div className="main-sect">
         <div className="main-text">
-          <h1>Welcome to Chatter: A Haven for Text-Based Content</h1>
+          <h1>Welcome to Z-chat: A Haven for Text-Based Content</h1>
           <p>
             Unleash the Power of Words, Connect with Like-minded Readers and
             Writers

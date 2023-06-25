@@ -54,11 +54,12 @@
       gap: 1rem;
     }
     .nav-btn .btn {
-      padding: 0.9rem 1.7rem;
+      padding: .9rem 1.7rem !important;
       cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
     }
     .nav-btn .btn:hover {
-      padding: 0.7rem 1.5rem;
       cursor: pointer;
       transition: 1s ease-in-out all;
     }
@@ -79,6 +80,18 @@
       color: var(--White);
     }
     .btn-2:hover {
+      color: var(--Black);
+      background: var(--White);
+      border: var(--one-px) solid var(--btn-color);
+      border-radius: 0.4rem;
+    }
+    .btn-3 {
+      border-radius: 0.4rem;
+      background: var(--btn-color);
+      border: none;
+      color: var(--White);
+    }
+    .btn-3:hover {
       color: var(--Black);
       background: var(--White);
       border: var(--one-px) solid var(--btn-color);
@@ -123,7 +136,7 @@
       line-height: 2.25rem;
     }
     .main-btn {
-      padding: 1rem 0.6rem;
+      padding: .6rem !important;
       cursor: pointer;
       border-radius: 0.4rem;
       background: var(--btn-color);
@@ -136,6 +149,13 @@
       text-align: center;
       text-decoration: none;
     }
+    .main-btn:hover {
+      color: var(--Black);
+      background: var(--White);
+      border: var(--one-px) solid var(--btn-color);
+      border-radius: 0.4rem;
+      transition: 1s ease-in-out all;
+    }
     .bt {
       color: var(--White);
     }
@@ -143,13 +163,6 @@
       color: var(--Black) !important;
       border: 1px solid var(--btn-color);
       background-color: var(--White);
-    }
-    .main-btn:hover {
-      color: var(--Black);
-      background: var(--White);
-      border: var(--one-px) solid var(--btn-color);
-      border-radius: 0.4rem;
-      transition: 1s ease-in-out all;
     }
     /* section-1 */
     .sect-1 {
@@ -244,7 +257,6 @@
       flex-shrink: 1;
       flex-basis: 100%;
       position: relative;
-      place-items: center;
     }
     .card-1,
     .card-2,
@@ -264,30 +276,30 @@
     .card-3 h1 {
       text-align: left;
     }
-    .card-1 img {
+    .card-1 .img {
       border-radius: 50%;
-      height: 3.5rem;
-      background: url(../Image/carbon_analytics.png) no-repeat center;
-      width: 3.5rem;
-      background-size: contain;
-      background-color: #d6d1f833;
+      height: 4.5rem !important;
+      background: url(../Image/carbon_analytics.png) no-repeat center !important;
+      background-color: var(--card-bg) !important;
+      width: 4.5rem !important;
+      border: .1rem solid var(--text-bg-1);
     }
-    .card-2 img {
+    .card-2 .img {
       background: url(../Image/fluent_people-community-32-filled.png) no-repeat
         center;
-      /* background-size: contain; */
-      width: 3.5rem;
-      background-color: #d6d1f833;
+      width: 4.5rem;
+      background-color: var(--card-bg);
       border-radius: 50%;
-      height: 3.5rem;
+      height: 4.5rem;
+      border: .1rem solid var(--text-bg-1);
     }
-    .card-3 img {
-      background-color: #d6d1f833 !important;
-      border-radius: 50%;
+    .card-3 .img {
       background: url(../Image/Vector.png) no-repeat center;
-      /* background-size: cover; */
-      width: 3.5rem;
-      height: 3.5rem;
+      background-color: var(--card-bg);
+      border-radius: 50%;
+      width: 4.5rem;
+      height: 4.5rem;
+      border: .1rem solid var(--text-bg-1);
     }
     .card-2 {
       flex: 1;
@@ -309,11 +321,10 @@
     }
     .join-us-container {
       display: flex;
-      align-items: center;
-      margin: auto;
+      margin: auto !important;
       gap: 2rem;
       padding: 0 3rem;
-      place-items: center;
+      place-items: center !important;
     }
     .join-us-img {
       background: url(../Image/unsplash_ZHvM3XIOHoE.jpg) no-repeat
@@ -451,7 +462,7 @@
       display: none;
     }
   }
-  @media (max-width: 1104px) {
+  @media (max-width: 1182px) {
     /* section-1 */
     .sect-1 {
       padding: 3rem !important;
@@ -653,6 +664,9 @@
       font-family: var(--font-family);
       line-height: 2.25rem;
     }
+    .main-btn {
+      padding: .6rem !important;
+    }
 
     .blog-col{
       display: flex;
@@ -739,30 +753,35 @@
     .card-3 h1 {
       text-align: left;
     }
-    .card-1 .img {
-      background: url(../Image/carbon_analytics.jpg) no-repeat center;
-      background-size: cover;
-      width: 3.5rem;
-      height: 3.5rem;
-      background-color: #d6d1f833;
-      border-radius: 50%;
+    .card-img-cont{
+      display: flex;
+      place-content: center;
     }
-    .card-2 img {
+    .card-1 .img {
+      border-radius: 50%;
+      background: url(../Image/carbon_analytics.png) no-repeat center !important;
+      background-color: var(--card-bg) !important;
+      width: 5rem;
+      height: 5rem;
+      border: .1rem solid var(--text-bg-1);
+
+    }
+    .card-2 .img {
       background: url(../Image/fluent_people-community-32-filled.png) no-repeat
         center;
-      background-size: cover;
-      width: 3.5rem;
-      background-color: #d6d1f833;
+      width: 5rem;
+      background-color: var(--card-bg);
       border-radius: 50%;
-      height: 3.5rem;
+      height: 5rem;
+      border: .1rem solid var(--text-bg-1);
     }
-    .card-3 img {
-      background-color: #d6d1f833;
-      border-radius: 50%;
+    .card-3 .img {
       background: url(../Image/Vector.png) no-repeat center;
-      background-size: cover;
-      width: 3.5rem;
-      height: 3.5rem;
+      background-color: var(--card-bg);
+      border-radius: 50%;
+      width: 5rem;
+      height: 5rem;
+      border: .1rem solid var(--text-bg-1);
     }
     .card-1 p,
     .card-2 p,
@@ -852,6 +871,7 @@
       flex-direction: column;
       justify-content: space-around;
       gap: 1.5rem;
+      place-content: center;
       background-color: var(--join-us-bg);
     }
     .explore-cont,
@@ -886,6 +906,25 @@
     .blog-cont a:hover {
       color: var(--btn-color);
       transition: 1s ease-in-out all;
+    }
+  }
+  @media (max-width: 669px) {
+    .add-art-cont{
+      padding: 3rem 1rem;
+      width: 90%;
+    }
+    .pub-text{
+      gap: 1rem;
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      border: none;
+    }
+    .pub-cont{
+      margin: 4rem 0;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
     }
   }
   @media (max-width: 656px) {
@@ -1011,30 +1050,31 @@
     .card-3 h1 {
       text-align: left;
     }
-    .card-1 img {
-      background: url(../Image/carbon_analytics.png) no-repeat center;
-      background-size: contain;
-      width: 3.5rem;
-      height: 3.5rem;
-      background-color: #d6d1f833;
+    .card-1 .img {
       border-radius: 50%;
+      height: 5rem;
+      background: url(../Image/carbon_analytics.png) no-repeat center !important;
+      background-color: var(--card-bg) !important;
+      width: 5rem;
+      border: .1rem solid var(--text-bg-1);
+
     }
-    .card-2 img {
+    .card-2 .img {
       background: url(../Image/fluent_people-community-32-filled.png) no-repeat
         center;
-      background-size: cover;
-      width: 3.5rem;
-      background-color: #d6d1f833;
+      width: 5rem;
+      background-color: var(--card-bg);
       border-radius: 50%;
-      height: 3.5rem;
+      height: 5rem;
+      border: .1rem solid var(--text-bg-1);
     }
-    .card-3 img {
-      background-color: #d6d1f833;
+    .card-3 .img {
+      background: url(../Image/Vector.png) no-repeat center;
+      background-color: var(--card-bg);
       border-radius: 50%;
-      background: url(../Image/unsplash_ZHvM3XIOHoE.jpg) no-repeat center;
-      background-size: cover;
-      width: 3.5rem;
-      height: 3.5rem;
+      width: 5rem;
+      height: 5rem;
+      border: .1rem solid var(--text-bg-1);
     }
     .card-1 p,
     .card-2 p,
@@ -1071,6 +1111,28 @@
       line-height: 1.7rem;
       width: 100%;
     }
+    .add-art-cont{
+      padding: 3rem .1rem;
+      width: 100%;
+      margin:  0;
+      border: none;
+    }
+    .pub-text{
+      gap: 1rem;
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      border: none;
+    }
+    .pub-cont{
+      margin: 4rem 0;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+    .publish{
+      margin-right: 1rem;
+    }
     /* footer */
     .foot-container {
       margin-top: 5rem;
@@ -1092,6 +1154,14 @@
     .sect-1-aside .head p {
       width: 58rem !important;
     }
-    
+
+    .join-us-container {
+      place-content: center;
+    }
+    .foot-container {
+      padding: 2.5rem 2rem;
+      display: flex;
+      place-content: center;
+    }
   }
   

@@ -1,4 +1,3 @@
-import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 const Share = () => {
@@ -11,7 +10,7 @@ const Share = () => {
           <div className="share-img-3"></div>
         </div>
         <div className="share-text">
-          <h1>Write, read and connect with great minds on chatter</h1>
+          <h1>Write, read and connect with great minds on Z-chat</h1>
           <p>
             Share people your great ideas, and also read write-ups based on
             your interests. connect with people of same interests and goals{" "}

@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
+import { Link } from "react-router-dom"
 
 const Footer = () => {
   return (
@@ -10,20 +9,19 @@ const Footer = () => {
         </div>
         <div className="explore-cont">
           <h2>Explore</h2>
-          <a href="#">Community</a>
-          <a href="#">Trending blogs</a>
-          <a href="#">Chatter for teams</a>
+          <Link to='/community'>Community</Link>
+          <Link to='/team'>Z-Chat for teams</Link>
         </div>
         <div className="support-cont">
           <h2>Support</h2>
-          <a href="#">Support docs</a>
-          <a href="#">Join slack</a>
-          <a href="#">Contact</a>
+          <Link to='/support'>Support docs</Link>
+          <Link to='/slack'>Join slack</Link>
+          <Link to='/contact'>Contact</Link>
         </div>
         <div className="blog-cont">
           <h2>Official blog</h2>
-          <a href="#">Official blog</a>
-          <a href="#">Engineering blog</a>
+          <Link to='/official_blog'>Official blog</Link>
+          <Link to='/engineering_blog'>Engineering blog</Link>
         </div>
       </div>
     </footer>
