@@ -9,8 +9,10 @@ const Blogs = () => {
     <div className="blog">
       <div className="blog-sect">
         <div className="blog-container">
+          <div className="side-cont">
         <SideBar />
-        <div className="blog-col">
+          </div>
+        <div className="blog-col blog-col-1">
       <TopBar data={[]} />
       <div className="blog-area">
         <Outlet />
@@ -19,6 +21,8 @@ const Blogs = () => {
         </div>
       </div>
     </div>
+
+
     {/* mobile */}
     <div className="blog-mob">
         <div className="blog-col-mob">

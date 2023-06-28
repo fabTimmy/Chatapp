@@ -30,7 +30,7 @@ const SignUp = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const { user } = useAppSelector(state => state.auth)
+  
   
   
   const handleFormSubmit = async (data: AuthForm) => {
@@ -99,7 +99,8 @@ const SignUp = () => {
             photoUrl: user.photoURL || null,
           })
         );
-      navigate("/blogs/feed");
+      navigate("/blogs/feed/article");
+      window.localStorage.getItems('isAuth', true)
     } catch (error: any) {
       const errorCode = error.code;
       if(errorCode === 'auth/email-already-in-use'){
@@ -118,7 +119,8 @@ const SignUp = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       console.log(result.user);
-      navigate("/blogs/feed");
+      navigate("/blogs/feed/article");
+      window.localStorage.getItems('isAuth', true)
       console.log(result.user.providerData);
     } catch (error: any) {
       const errorCode = error.code;

@@ -4,6 +4,7 @@ import './Style/Menu.css';
 import './Style/Auth.css';
 import './Style/Media.css';
 import './Style/BlogNav.css';
+import './Style/Profile.css';
 import Pages from './Components/Route/Pages';
 // import { ColorModeContext, useMode } from './Features/Theme';
 // import { CssBaseline, ThemeProvider } from '@mui/material';

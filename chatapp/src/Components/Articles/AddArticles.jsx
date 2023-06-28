@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { BsPlusLg } from "react-icons/bs";
+import { useEffect, useRef, useState } from "react";
+import { BsBackspace, BsPlusLg } from "react-icons/bs";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { db, auth, storage } from "../../Config/firebase";
 import { ref, listAll, getDownloadURL } from "firebase/storage";
@@ -7,7 +7,27 @@ import { useNavigate } from "react-router-dom";
 // import { v4 } from 'uuid';
 import { Bars } from "react-loader-spinner";
 
-const AddArticles = () => {
+let useClickOutside = (handler) => {
+  let domNode = useRef(null);
+
+  useEffect(() => {
+    let maybeHandler = (e) => {
+      const nodes = domNode.current
+      if(!nodes.contains(e.target)){
+        handler();
+      }
+    }
+    document.addEventListener('mousedown', maybeHandler);
+    
+    return () => {
+      document.removeEventListener('mousedown', maybeHandler);
+      };
+  })
+
+  return domNode
+}
+
+const AddArticles = ({setOpen, open}) => {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
   // const [postImage, setPostImage] = useState(null);
@@ -22,6 +42,10 @@ const AddArticles = () => {
   const navigate = useNavigate();
   const postCollectionRef = collection(db, "posts");
   const imageListRef = ref(storage, 'images/')
+  
+  let domNode = useClickOutside(() => {
+    setIsOpen(false);
+  });
   
   const createPost = async () => {
     await addDoc(postCollectionRef, {
@@ -88,7 +112,8 @@ const AddArticles = () => {
     <div>
       <div className="add-art-cont">
         <div className="publish">
-        <button onClick={createPost} type="submit" className="pub-btn">
+        <BsBackspace onClick={() => setOpen(!open)} className='form-icon'/>
+        <button ref={domNode} onClick={createPost} type="submit" className="pub-btn">
               <div className="spinner" >
               {loading && <span><Bars
               width={20}

@@ -11,14 +11,19 @@ import { PrivateRoute } from "./PrivateRoute";
 import Feed from "../Blog-cont/Feed";
 import { useEffect } from "react";
 import { auth } from "../../Config/firebase";
-import { useAppDispatch } from "../../Hooks/StoreHook";
+import { useAppDispatch} from "../../Hooks/StoreHook";
 import { signin } from "../../Features/AuthSlice";
-import AddArticles from "../Articles/AddArticles";
-import Profile from "../Scenes/Profile";
+import Profile from "../Blog-cont/Profile";
 import Articles from "../Articles/Articles";
+import Analytics from "../Blog-cont/Analytics";
+import Drafts from "../Blog-cont/Drafts";
+import Bookmark from "../Blog-cont/Bookmark";
+import TeamBlog from "../Blog-cont/TeamBlog";
+import Notification from "../Blog-cont/Notification";
 
 const Pages = () => {
   const dispatch = useAppDispatch();
+
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -43,12 +48,15 @@ const Pages = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<PageNotFound />} />
         {/* nested routes */}
         <Route path="/blogs" element={<Blogs />} >
+        <Route path="analytics" element={<Analytics />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="add-articles" element={<AddArticles />} />
+        <Route path="draft" element={<Drafts />} />
+        <Route path="bookmark" element={<Bookmark />} />
+        <Route path="team-blog" element={<TeamBlog />} />
+        <Route path="notifications" element={<Notification />} />
         {/* nested feed routes start */}
         <Route path="feed" element={<Feed />}>
         <Route path="article" element={<Articles />} />

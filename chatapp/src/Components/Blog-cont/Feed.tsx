@@ -1,9 +1,11 @@
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { BsPencil } from 'react-icons/bs';
+import AddArticles from '../Articles/AddArticles';
+import { useState } from 'react';
 
 
 const Feed = () => {
-
+  const [open, setOpen] = useState(false)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleFileUpload = (e: { target: { files: any[]; }; }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -12,6 +14,10 @@ const Feed = () => {
   };
 
   return (
+    <div >{
+      open ?
+      <AddArticles setOpen={setOpen} open={open}/>
+        :
     <div className='feed-container'>
       <div className="article-cont">
         <div className="article">
@@ -21,7 +27,7 @@ const Feed = () => {
             <p>Explore different content you’d love </p>
             </div>
             <div>
-              <Link to='/blogs/add-articles' className='head-btn'><BsPencil/> Post content</Link>
+              <p className='head-btn' onClick={() => setOpen(!open)} ><BsPencil/> Post content</p>
             </div>
           </div>
           <div className="article-route">
@@ -36,6 +42,8 @@ const Feed = () => {
       </div>
       <div>
       </div>
+    </div>
+    }
     </div>
   )
 }

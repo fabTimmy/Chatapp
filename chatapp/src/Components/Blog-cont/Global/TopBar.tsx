@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BsBookmarks, BsSearch } from "react-icons/bs";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { useAppSelector } from "../../../Hooks/StoreHook";
+import { useAppDispatch, useAppSelector } from "../../../Hooks/StoreHook";
 import { Link, NavLink } from "react-router-dom";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { MdOutlineAnalytics, MdOutlineDrafts, MdOutlineFeedback, MdOutlineManageAccounts, MdOutlineNotificationsNone } from "react-icons/md";
-import { AiOutlineHome, AiOutlineTeam } from "react-icons/ai";
+import { AiOutlineTeam } from "react-icons/ai";
 import { CgLogOut } from "react-icons/cg";
+import { signOut } from "firebase/auth";
+import { signout } from "../../../Features/AuthSlice";
+import { auth } from "../../../Config/firebase";
+import { GrClose } from "react-icons/gr";
 
 interface Item {
   id: number;
@@ -17,16 +21,40 @@ interface Props {
   data: Item[];
 }
 
+let useClickOutside = (handler: { (): void; (): void; }) => {
+  let domNode = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let maybeHandler = (e: { target: any; }) => {
+      const nodes: any = domNode.current
+      if(!nodes.contains(e.target)){
+        handler();
+      }
+    }
+    document.addEventListener('mousedown', maybeHandler);
+    
+    return () => {
+      document.removeEventListener('mousedown', maybeHandler);
+      };
+  })
+
+  return domNode
+}
+
 const SearchBar: React.FC<Props> = ({ data }) => {
-  const [open, setOpen] = useState(true);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(false);
 
   const { user } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch()
 
   const menuShow = () => {
     setActive(!active)
   }
+
+  let domNode = useClickOutside(() => {
+    setActive(false);
+  });
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
@@ -36,8 +64,10 @@ const SearchBar: React.FC<Props> = ({ data }) => {
     item.name.toLowerCase().includes(query.toLowerCase())
   );
 
-  const handleLogout = () => {
 
+  const handleLogout = async () => {
+    await signOut(auth);
+    dispatch(signout());
   }
 
   return (
@@ -63,7 +93,7 @@ const SearchBar: React.FC<Props> = ({ data }) => {
         <div className="alarm-cont">
           <IoMdNotificationsOutline className="alarm-icon" />
           {user ? (
-            <Link to="/profile">
+            <Link to="profile">
               {user?.photoUrl ? (
                 <img src={user?.photoUrl} alt="" />
               ) : (
@@ -102,7 +132,7 @@ const SearchBar: React.FC<Props> = ({ data }) => {
         <div className="alarm-cont">
           <IoMdNotificationsOutline className="alarm-icon" />
           {user ? (
-            <Link to="/profile">
+            <Link to="profile">
               {user?.photoUrl ? (
                 <img src={user?.photoUrl} alt="" />
               ) : (
@@ -118,31 +148,35 @@ const SearchBar: React.FC<Props> = ({ data }) => {
             <li key={item.id}>{item.name}</li>
           ))}
         </ul>
-        <div className="slide-bg" style={{ transform: `translateX(${active ? "0%" : "-100%"})`, transition: '.3s ease all' }}>
-          <nav className={active ? 'slide active' : 'slide'}>
+        {/* slide */}
+        <div className="slide-bg" style={{ transform: `translateX(${active ? "0%" : "-100%"})`, transition: '-.2s ease all' }}>
+          <nav ref={domNode} className={active ? 'slide active' : 'slide'}>
             <div className='blog-side-cont  '>
+              <div className="blog-side-head">
+              <GrClose onClick={menuShow} className="close-btn" />
               <Link to="/" className="search-logo">
                 <h1>Z-chat</h1>
               </Link>
+              </div>
               <h2 className='p-text-mob'>Overview</h2>
               <div className="overview-cont-side">
-                <NavLink to="feed" className="overview-link-mob feed-cont">
+                <NavLink to="feed/article" onClick={menuShow} className="overview-link-mob feed-cont">
                   <MdOutlineFeedback className='feed-icon' />
                   <p className='p-text-mob'>Feed</p>
                 </NavLink>
-                <NavLink to="/bookmark" className="overview-link-mob bookmark-cont">
+                <NavLink to="bookmark" onClick={menuShow} className="overview-link-mob bookmark-cont">
                   <BsBookmarks className='bookmark-icon' />
                   <p className='p-text-mob'>Bookmarks</p>
                 </NavLink>
-                <NavLink to="/team-blog" className="overview-link-mob team-blog-cont">
+                <NavLink to="team-blog" onClick={menuShow} className="overview-link-mob team-blog-cont">
                   <AiOutlineTeam className='team-blogs-icon' />
                   <p className='p-text-mob'>Team blogs</p>
                 </NavLink>
-                <NavLink to="/draft" className="overview-link-mob draft-cont">
+                <NavLink to="draft" onClick={menuShow} className="overview-link-mob draft-cont">
                   <MdOutlineDrafts className='drafts-icon' />
                   <p className='p-text-mob'>Drafts</p>
                 </NavLink>
-                <NavLink to="/analytics" className="overview-link-mob analytics-cont">
+                <NavLink to="analytics" onClick={menuShow} className="overview-link-mob analytics-cont">
                   <MdOutlineAnalytics className='analytics-icon' />
                   <p className='p-text-mob'>Analytics</p>
                 </NavLink>
@@ -150,11 +184,11 @@ const SearchBar: React.FC<Props> = ({ data }) => {
               <div className="personal-cont">
                 <h2 className='p-text-mob'>Personal</h2>
                 <div className="personal-links">
-                  <NavLink to="profile" className="personal-link-mob acc-cont">
+                  <NavLink to="profile" onClick={menuShow} className="personal-link-mob acc-cont">
                     <MdOutlineManageAccounts className="account-icon" />
                     <p className='p-text-mob'>Account</p>
                   </NavLink>
-                  <NavLink to="/notifications" className="personal-link-mob notify-cont">
+                  <NavLink to="notifications" onClick={menuShow} className="personal-link-mob notify-cont">
                     <MdOutlineNotificationsNone className='notifications-icon' />
                     <p className='p-text-mob' >Notifications</p>
                   </NavLink>

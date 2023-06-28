@@ -34,7 +34,8 @@ const SignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
-        navigate("/blogs/feed");
+        navigate("/blogs/feed/article");
+        window.localStorage.getItems('isAuth', true)
       })
       .catch((error) => {
         const errorCode = error.code;

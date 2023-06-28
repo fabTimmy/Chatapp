@@ -347,7 +347,7 @@
       padding: 0.7rem;
       margin: 0.6rem 0;
       border-radius: 0.4rem;
-      border: 0.3px solid var(--s-border-color);;
+      border: 0.3px solid var(--s-border-color);
     }
     
     .sign-in-cont .btn {
