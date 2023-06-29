@@ -14,6 +14,7 @@ import { useState } from "react";
 
 const BlogNav = () => {
   const [open, setOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(true);
 
   const dispatch = useAppDispatch()
 
@@ -25,16 +26,18 @@ const BlogNav = () => {
 
   return (
     <>
-    <div className={`blog-nav-cont ${open ? 'sidecollapse'  : 'sidenocollapse'}`}>
+    <div className={`blog-nav-cont ${open ? 'sidecollapse'  : 'sidenocollapse'}`} >
       <div className='back-cont'  >
         <HiMenuAlt2 className='back' onClick={() => setOpen(!open)} />
       </div>
       <h2 className={`p-text ${open ? 'p-m' : ''}`}>Overview</h2>
       <div className="overview-cont">
         <NavLink to="feed/article" className="overview-link feed-cont">
-          <MdOutlineFeedback className={`feed-icon ${open ? 'p-i' : ''}`} />
+          <MdOutlineFeedback className={`feed-icon ${open ? 'p-i' : ''}`} onMouseEnter={() => setIsOpen(!isOpen)}  />
+          <div className="tooltip">
           <p className={`p-text ${open ? 'p-nocollapse delay' : 'p-collapse nodelay-1'}`}>Feed</p>
-          {/* <p className={`p-hover ${open && 'hid'}`}>Feed</p> */}
+          <p className='tooltiptext'>Feed</p>
+          </div>
         </NavLink>
         <NavLink to="bookmark" className="overview-link bookmark-cont">
           <BsBookmarks className={`bookmark-icon ${open ? 'p-i' : ''}`} />

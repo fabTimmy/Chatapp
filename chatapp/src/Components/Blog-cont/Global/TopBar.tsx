@@ -56,9 +56,13 @@ const SearchBar: React.FC<Props> = ({ data }) => {
     setActive(false);
   });
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
   };
+
+  const onSearch = (searchTerm: any) => {
+
+  }
 
   const filteredData = data.filter((item) =>
     item.name.toLowerCase().includes(query.toLowerCase())
@@ -87,7 +91,7 @@ const SearchBar: React.FC<Props> = ({ data }) => {
               onChange={handleSearch}
               className="search-bd"
             />
-            <BsSearch className="search-icon" />
+            <BsSearch className="search-icon" onClick={() => onSearch(query)} />
           </div>
         </div>
         <div className="alarm-cont">

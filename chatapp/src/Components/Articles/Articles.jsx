@@ -32,7 +32,12 @@ const Articles = () => {
   const [postList, setPostList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false)
+  const [like, setLike] = useState(120),
+  [isLike, setIsLike] = useState(false)
+
   const postCollectionRef = collection(db, "posts");
+
+  const [listImage, setListImage] = useState([]);
 
   const { user } = useAppSelector((state) => state.auth);
 
@@ -63,6 +68,11 @@ const Articles = () => {
         </div>
       </div>
     );
+  }
+
+  const onLikeHandler = () => {
+    setLike(like + (isLike ? -1 : 1));
+    setIsLike(!isLike);
   }
 
   return (
@@ -111,7 +121,7 @@ const Articles = () => {
                 <span>200</span>
               </p>
               <p className="art-img-con">
-                <AiOutlineHeart className="art-img-icon" />
+                <AiOutlineHeart className="art-img-icon" onClick={onLikeHandler} />
                 <span>120</span>
               </p>
               <p className="art-img-con">
@@ -156,14 +166,19 @@ const Articles = () => {
               </div>
               {/* large img */}
               <div className="art-img-cont">
-              <div className="art-img">{post.postImage}</div>
+              <div className="art-img">
+              {listImage.map((url) => {
+                return <img src={url} alt=""/>
+              })}
+                </div>
+              {/* <div className="art-img">{post.postImage}</div> */}
             <div className="art-img-icons">
               <p className="art-img-con">
                 <AiOutlineComment className="art-img-icon" />
                 <span>{}</span>
               </p>
               <p className="art-img-con">
-                <AiOutlineHeart className="art-img-icon" />
+                <AiOutlineHeart className="art-img-icon" onClick={onLikeHandler} />
                 <span>{}</span>
               </p>
               <p className="art-img-con">

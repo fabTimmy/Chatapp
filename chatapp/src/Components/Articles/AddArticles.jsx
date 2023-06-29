@@ -1,51 +1,54 @@
 import { useEffect, useRef, useState } from "react";
-import { BsBackspace, BsPlusLg } from "react-icons/bs";
+import { BsPlusLg } from "react-icons/bs";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { db, auth, storage } from "../../Config/firebase";
-import { ref, listAll, getDownloadURL } from "firebase/storage";
+import { ref, listAll, getDownloadURL, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
-// import { v4 } from 'uuid';
 import { Bars } from "react-loader-spinner";
+import { MdOutlineAddPhotoAlternate } from "react-icons/md";
+import { GrClose } from "react-icons/gr";
+import { v4 } from "uuid";
 
 let useClickOutside = (handler) => {
   let domNode = useRef(null);
 
   useEffect(() => {
     let maybeHandler = (e) => {
-      const nodes = domNode.current
-      if(!nodes.contains(e.target)){
+      const nodes = domNode.current;
+      if (!nodes.contains(e.target)) {
         handler();
       }
-    }
-    document.addEventListener('mousedown', maybeHandler);
-    
+    };
+    document.addEventListener("mousedown", maybeHandler);
+
     return () => {
-      document.removeEventListener('mousedown', maybeHandler);
-      };
-  })
+      document.removeEventListener("mousedown", maybeHandler);
+    };
+  });
 
-  return domNode
-}
+  return domNode;
+};
 
-const AddArticles = ({setOpen, open}) => {
+const AddArticles = ({ setOpen, open }) => {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
-  // const [postImage, setPostImage] = useState(null);
+  const [postImage, setPostImage] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [listImage, setListImage] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    image: '',
-})
-  const [isOpen, setIsOpen] = useState(false)
+  const [formData, setFormData] = useState({image: "",});
+  const [image, setImage] = useState(null);
+  const [fileName, setFileName] = useState("No selected file");
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
   const postCollectionRef = collection(db, "posts");
-  const imageListRef = ref(storage, 'images/')
-  
+  const imageListRef = ref(storage, "images/");
+
   let domNode = useClickOutside(() => {
     setIsOpen(false);
   });
+
   
   const createPost = async () => {
     await addDoc(postCollectionRef, {
@@ -57,49 +60,46 @@ const AddArticles = ({setOpen, open}) => {
       },
       createdAt: Timestamp.now().toDate(),
     });
+    navigate("/blogs/feed/article");
+
+    if (postImage == null) return;
+    const imageRef = ref(storage, `images/${postImage.name + v4()}`)
+    uploadBytes(imageRef, postImage).then((snapShot) => {
+      getDownloadURL(snapShot.ref).then((url) => {
+        setListImage((prev) => [...prev, url])
+      })
+    })
     navigate('/blogs/feed/article');
-    
-    // if (postImage == null) return;
-    // const imageRef = ref(storage, `images/${postImage.name + v4()}`)
-    // uploadBytes(imageRef, postImage).then((snapShot) => {
-    //   getDownloadURL(snapShot.ref).then((url) => {
-    //     setListImage((prev) => [...prev, url])
-    //   })
-    // })
-    // navigate('/blogs/feed/article');
 
     setLoading(true);
-    await fetch('/').then(() => {
+    await fetch("/").then(() => {
       // console.log('fetch success');
     });
-      setLoading(false);
-  //   if(!formData.image){
-  //     alert('Please fill in the field')
-  //   }  
-  //   const storageRef = ref(storage, `image/${Date.now()}${formData.image.name}`)
-  //  const uploadImage = uploadBytesResumable(storageRef, formData.image)
-  //  uploadImage.on('state_changed', (snapshot) => {
+    setLoading(false);
 
-  //  })
+    //   if(!formData.image){
+    //     alert('Please fill in the field')
+    //   }
+    //   const storageRef = ref(storage, `image/${Date.now()}${formData.image.name}`)
+    //  const uploadImage = uploadBytesResumable(storageRef, formData.image)
+    //  uploadImage.on('state_changed', (snapshot) => {
+
+    //  })
   };
-  
-  const handleImageChange = (e) => {
-    setFormData({...formData, image:e.target.files[0]})
-  }
+
   useEffect(() => {
     listAll(imageListRef).then((res) => {
       res.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
           setListImage((prev) => [...prev, url]);
-        })
-      })
-    })
-  }, [imageListRef])
+        });
+      });
+    });
+  }, [imageListRef]);
 
   const menuShow = () => {
-    setIsOpen(!isOpen)
-  }
-
+    setIsOpen(!isOpen);
+  };
 
   // const fetchData = async () => {
   //   setLoading(true);
@@ -112,19 +112,26 @@ const AddArticles = ({setOpen, open}) => {
     <div>
       <div className="add-art-cont">
         <div className="publish">
-        <BsBackspace onClick={() => setOpen(!open)} className='form-icon'/>
-        <button ref={domNode} onClick={createPost} type="submit" className="pub-btn">
-              <div className="spinner" >
-              {loading && <span><Bars
-              width={20}
-              height={20}
-              color='black'
-              /></span>}
-              </div>
-              {!loading && <span>Publish</span>}
-            </button>
+        <GrClose onClick={() => setOpen(!open)} className="form-icon" />
+          <button
+            onClick={createPost}
+            type="submit"
+            className="pub-btn"
+          >
+            <div className="spinner">
+              {loading && (
+                <span>
+                  <Bars width={20} height={20} color="black" />
+                </span>
+              )}
+            </div>
+            {!loading && <span>Publish</span>}
+          </button>
         </div>
         <div className="pub-cont">
+          <div className="img-dis">
+            {image && <img src={image} alt={fileName} />}
+          </div>
           <div className="pub-text">
             <input
               type="text"
@@ -145,17 +152,32 @@ const AddArticles = ({setOpen, open}) => {
                 setPostText(e.target.value);
               }}
             />
-            <div className="up-cont">
+            <div ref={domNode} className="up-cont">
               <BsPlusLg className="plus" onClick={menuShow} />
-            {isOpen && 
-            <input
-              type="file"
-              name="image"
-              accept="image/*"
-              className="up-img"
-              onChange={(e) => handleImageChange(e)}
-            />
-          }
+              {isOpen && (
+                <>
+                  <MdOutlineAddPhotoAlternate
+                    size={60}
+                    onClick={() =>
+                      document.querySelector(".up-img").click()
+                    }
+                    className="hiphoto"
+                  />
+                  <input
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    className="up-img"
+                    hidden
+                    onChange={({ target: { files } }) => {
+                      files[0] && setFileName(files[0].name);
+                      if (files) {
+                        setImage(URL.createObjectURL(files[0]));
+                      }
+                    }}
+                  />
+                </>
+              )}
             </div>
           </div>
         </div>

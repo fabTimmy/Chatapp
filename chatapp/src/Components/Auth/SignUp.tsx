@@ -1,8 +1,10 @@
+/* eslint-disable no-restricted-globals */
 import { useState } from "react";
 import { auth, provider, googleProvider, db } from "../../Config/firebase";
 import { 
   createUserWithEmailAndPassword, 
-  signInWithPopup
+  signInWithPopup,
+  updateProfile
 } from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
 import { setDoc, doc } from "firebase/firestore";
@@ -16,7 +18,7 @@ import { useForm } from "react-hook-form";
 import { AuthForm, authFormSchema } from "../../Models/Form";
 import { useDispatch } from "react-redux";
 import { signin } from "../../Features/AuthSlice";
-// import { useAppSelector } from "../../Hooks/StoreHook";
+import { useAppSelector } from "../../Hooks/StoreHook";
 import { Bars } from "react-loader-spinner";
 
 const SignUp = () => {
@@ -30,6 +32,7 @@ const SignUp = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { user } = useAppSelector((state) => state.auth)
   
   
   
@@ -53,6 +56,7 @@ const SignUp = () => {
             email: user.email,
             id: user.uid,
             photoUrl: user.photoURL || null,
+            displayName: user.displayName || null,
           })
         );
     } catch (error: any) {
@@ -97,6 +101,7 @@ const SignUp = () => {
             email: user.email,
             id: user.uid,
             photoUrl: user.photoURL || null,
+            displayName: user.displayName || null,
           })
         );
       navigate("/blogs/feed/article");

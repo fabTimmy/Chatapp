@@ -186,7 +186,7 @@ body {
   padding: 3rem 5rem;
   width: 90%;
   margin: 2rem;
-  height: 35rem;
+  height: 35%;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -278,7 +278,7 @@ body {
   width: 40rem;
   height: 20rem;
   border-radius: .6rem;
-  background: url(../Image/thisisengineering-raeng-TXxiFuQLBKQ-unsplash.jpg);
+  /* background: url(../Image/thisisengineering-raeng-TXxiFuQLBKQ-unsplash.jpg); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -306,6 +306,10 @@ body {
 .art-img-icon:hover{
   color: var(--btn-color);
   transition: .5s ease all;
+}
+.dis-img{
+  width: 20rem;
+  height: 15rem;
 }
 /* Analytics */
 .analytics{
@@ -436,6 +440,7 @@ hr{
 .pub-cont {
   margin: 5rem 0;
   display: flex;
+  flex-direction: column;
   gap: 2rem;
   align-items: center;
 }
@@ -985,6 +990,17 @@ hr{
   right: 0;
   place-items: center;
 }
+.hiphoto{
+  padding: .7rem;
+  margin-left: .2rem;
+   border: 1px solid var(--border-color);
+   border-radius: 50%;
+}
+.hiphoto:hover{
+  color: var(--btn-color);
+  transition: .5s ease all;
+   border: 1px solid var(--btn-color);
+}
 /* blog-nav-cont */
 .blog-nav-cont {
   display: flex;
@@ -1083,11 +1099,37 @@ hr{
   transition-delay: 0ms;
 }
 
-.overview-link + .p-hover:hover {
+.p-hover {
+  margin-left: 1rem;
+  z-index: 5000;
+  position: fixed;
+  left: 4rem;
+}
+.p-hover:hover {
   padding: 0.5rem 0.4rem;
 }
-.hid {
-  display: none;
+.tooltiptext{
+  position: absolute;
+  top: 16.5%;
+  left: 7.5%;
+  z-index: 5000;
+  background-color: #333;
+  padding: .5rem 1rem;
+  color: var(--White);
+  transform: translateY(-215.5%);
+}
+.tooltiptext::before{
+  content: '';
+  position: absolute;
+  top: 16.5%;
+  left: 0;
+  z-index: 5000;
+  color: var(--White);
+  transform: translateY(-215.5%);
+  border-color: #0000 #0000 #0000 #000;
+}
+.tooltiptext:hover .tooltiptext{
+  left: -7.5%;
 }
 .head {
   display: flex;
@@ -1229,10 +1271,12 @@ hr{
 .form-icon {
   width: 1.6rem;
   height: 1.6rem;
+  cursor: pointer;
 }
 .form-icon:hover {
-  color: var(--btn-color);
+  color: var(--btn-color) !important;
   transition: 0.6s ease all;
+  transform: scale(1.1) rotate(-90deg);
 }
 .pro-form {
   display: flex;

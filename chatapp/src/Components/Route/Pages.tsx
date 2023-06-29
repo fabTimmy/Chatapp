@@ -59,7 +59,7 @@ const Pages = () => {
         <Route path="notifications" element={<Notification />} />
         {/* nested feed routes start */}
         <Route path="feed" element={<Feed />}>
-        <Route path="article" element={<Articles />} />
+        <Route path="article" element={<Articles  />} />
         </Route>
         {/* nested feed routes end */}
         </Route>

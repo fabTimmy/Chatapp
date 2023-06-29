@@ -2,6 +2,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { BsPencil } from 'react-icons/bs';
 import AddArticles from '../Articles/AddArticles';
 import { useState } from 'react';
+import Articles from '../Articles/Articles';
 
 
 const Feed = () => {
@@ -15,8 +16,8 @@ const Feed = () => {
 
   return (
     <div >{
-      open ?
-      <AddArticles setOpen={setOpen} open={open}/>
+      open ? 
+      <AddArticles setOpen={setOpen} open={open} />
         :
     <div className='feed-container'>
       <div className="article-cont">
