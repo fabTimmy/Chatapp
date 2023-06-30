@@ -2,7 +2,7 @@ import React from 'react'
 
 const TeamBlog = () => {
   return (
-    <div>TeamBlog</div>
+    <div className='site-info'>Site under construction...</div>
   )
 }
 

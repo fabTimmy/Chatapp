@@ -2,7 +2,7 @@ import React from 'react'
 
 const Bookmark = () => {
   return (
-    <div>Bookmark</div>
+    <div className='site-info'>Site under construction...</div>
   )
 }
 

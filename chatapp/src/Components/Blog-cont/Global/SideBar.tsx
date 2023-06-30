@@ -34,10 +34,8 @@ const BlogNav = () => {
       <div className="overview-cont">
         <NavLink to="feed/article" className="overview-link feed-cont">
           <MdOutlineFeedback className={`feed-icon ${open ? 'p-i' : ''}`} onMouseEnter={() => setIsOpen(!isOpen)}  />
-          <div className="tooltip">
           <p className={`p-text ${open ? 'p-nocollapse delay' : 'p-collapse nodelay-1'}`}>Feed</p>
-          <p className='tooltiptext'>Feed</p>
-          </div>
+          {/* <p className='tooltiptext'>Feed</p> */}
         </NavLink>
         <NavLink to="bookmark" className="overview-link bookmark-cont">
           <BsBookmarks className={`bookmark-icon ${open ? 'p-i' : ''}`} />

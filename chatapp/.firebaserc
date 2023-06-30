@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "zchat-c3aae"
+  },
+  "targets": {
+    "zchat-c3aae": {
+      "hosting": {
+        "zchat": [
+          "zchat-app"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

@@ -157,7 +157,6 @@ const SearchBar: React.FC<Props> = ({ data }) => {
           <nav ref={domNode} className={active ? 'slide active' : 'slide'}>
             <div className='blog-side-cont  '>
               <div className="blog-side-head">
-              <GrClose onClick={menuShow} className="close-btn" />
               <Link to="/" className="search-logo">
                 <h1>Z-chat</h1>
               </Link>

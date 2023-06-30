@@ -35,7 +35,6 @@ const SignIn = () => {
       .then((userCredential) => {
         console.log(userCredential);
         navigate("/blogs/feed/article");
-        window.localStorage.getItems('isAuth', true)
       })
       .catch((error) => {
         const errorCode = error.code;

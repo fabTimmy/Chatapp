@@ -50,6 +50,7 @@ const Pages = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<PageNotFound />} />
         {/* nested routes */}
+        <Route element={<PrivateRoute />}>
         <Route path="/blogs" element={<Blogs />} >
         <Route path="analytics" element={<Analytics />} />
         <Route path="profile" element={<Profile />} />
@@ -63,7 +64,6 @@ const Pages = () => {
         </Route>
         {/* nested feed routes end */}
         </Route>
-        <Route element={<PrivateRoute />}>
         </Route>
       </Routes>
     </AuthProvider>

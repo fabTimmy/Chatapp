@@ -6,25 +6,25 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../Config/firebase";
 import { HiMenuAlt3 } from "react-icons/hi";
 
-let useClickOutside = (handler: { (): void; (): void; }) => {
-  let domNode = useRef<HTMLDivElement>(null);
+// let useClickOutside = (handler) => {
+//   let domNode = useRef(null);
 
-  useEffect(() => {
-    let maybeHandler = (e: { target: any; }) => {
-      const nodes: any = domNode.current
-      if(!nodes.contains(e.target)){
-        handler();
-      }
-    }
-    document.addEventListener('mousedown', maybeHandler);
+//   useEffect(() => {
+//     let maybeHandler = (e) => {
+//       const nodes = domNode.current
+//       if(!nodes.contains(e.target)){
+//         handler();
+//       }
+//     }
+//     document.addEventListener('mousedown', maybeHandler);
     
-    return () => {
-      document.removeEventListener('mousedown', maybeHandler);
-      };
-  })
+//     return () => {
+//       document.removeEventListener('mousedown', maybeHandler);
+//       };
+//   })
 
-  return domNode
-}
+//   return domNode
+// }
 
 const Nav = () => {
   const [active, setActive] = useState(false);
@@ -38,12 +38,12 @@ const Nav = () => {
   }
   const userSignout = async () => {
    await signOut(auth);
-    // dispatch(signOut());
+    dispatch(signOut());
   }
 
-  let domNode = useClickOutside(() => {
-    setIsOpen(false);
-  });
+  // let domNode = useClickOutside(() => {
+  //   setIsOpen(false);
+  // });
 
   return (
     <div className="header">
@@ -70,7 +70,7 @@ const Nav = () => {
             </>
           ) : (
             <>
-            <div ref={domNode} className="round-cont" onClick={() => setIsOpen(!isOpen)}>
+            <div  className="round-cont" onClick={() => setIsOpen(!isOpen)}>
               <div className="round-pro">
             {user?.photoUrl ? (
               <img src={user?.photoUrl} alt="" className="photourl" />
@@ -102,4 +102,3 @@ const Nav = () => {
 };
 
 export default Nav;
-

@@ -55,8 +55,7 @@ const SignUp = () => {
           signin({
             email: user.email,
             id: user.uid,
-            photoUrl: user.photoURL || null,
-            displayName: user.displayName || null,
+            photoUrl: user.photoURL || null
           })
         );
     } catch (error: any) {
@@ -100,8 +99,7 @@ const SignUp = () => {
           signin({
             email: user.email,
             id: user.uid,
-            photoUrl: user.photoURL || null,
-            displayName: user.displayName || null,
+            photoUrl: user.photoURL || null
           })
         );
       navigate("/blogs/feed/article");

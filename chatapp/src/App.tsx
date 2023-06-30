@@ -6,11 +6,8 @@ import './Style/Media.css';
 import './Style/BlogNav.css';
 import './Style/Profile.css';
 import Pages from './Components/Route/Pages';
-// import { ColorModeContext, useMode } from './Features/Theme';
-// import { CssBaseline, ThemeProvider } from '@mui/material';
 
 const App = () => {
-  // const [theme, colorMode] = useMode();
 
   return (
         <div className="App">

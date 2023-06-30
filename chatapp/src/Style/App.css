@@ -274,11 +274,16 @@ body {
   flex-direction: column;
   gap: .7rem;
 }
-.art-img{
+.site-info{
+  display: flex;
+  place-content: center;
+  margin-top: 15rem;
+}
+.art-img {
   width: 40rem;
   height: 20rem;
   border-radius: .6rem;
-  /* background: url(../Image/thisisengineering-raeng-TXxiFuQLBKQ-unsplash.jpg); */
+  background: url(../Image/thisisengineering-raeng-TXxiFuQLBKQ-unsplash.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
